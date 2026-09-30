@@ -1,0 +1,2451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Theory Group | CSE, IIT Bombay</title>
+<meta name="description" content="Theoretical Computer Science group, Department of CSE, IIT Bombay: faculty, seminars, students and alumni.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF; --surface:#F8F9FA; --surface2:#F1F3F4; --text:#202124; --text2:#5F6368; --border:#DADCE0;
+  --primary:#1A73E8; --primary-hover:#1765CC; --on-primary:#FFFFFF; --tint:#E8F0FE; --tint-text:#174EA6;
+  --warn:#B06000; --warn-bg:#FEF7E0; --scrim:rgba(32,33,36,.5);
+  --elev:0 1px 2px rgba(60,64,67,.3),0 2px 6px 2px rgba(60,64,67,.15);
+  --ring:rgba(32,33,36,.10);
+  --font:"Roboto", Arial, Helvetica, sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#202124; --surface:#292A2D; --surface2:#303134; --text:#E8EAED; --text2:#9AA0A6; --border:#3C4043;
+    --primary:#8AB4F8; --primary-hover:#AECBFA; --on-primary:#202124; --tint:#394457; --tint-text:#D2E3FC;
+    --warn:#FDD663; --warn-bg:#41371E; --scrim:rgba(0,0,0,.6);
+    --elev:0 1px 3px rgba(0,0,0,.5),0 4px 8px 3px rgba(0,0,0,.25);
+    --ring:rgba(255,255,255,.12);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#202124; --surface:#292A2D; --surface2:#303134; --text:#E8EAED; --text2:#9AA0A6; --border:#3C4043;
+  --primary:#8AB4F8; --primary-hover:#AECBFA; --on-primary:#202124; --tint:#394457; --tint-text:#D2E3FC;
+  --warn:#FDD663; --warn-bg:#41371E; --scrim:rgba(0,0,0,.6);
+  --elev:0 1px 3px rgba(0,0,0,.5),0 4px 8px 3px rgba(0,0,0,.25);
+  --ring:rgba(255,255,255,.12);
+  color-scheme:dark;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--primary);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+button{font:inherit;color:inherit}
+h1,h2,h3{margin:0;font-weight:400;line-height:1.25}
+h2{font-size:2rem;letter-spacing:-.25px}
+h3{font-size:1.125rem;font-weight:500}
+p{margin:0 0 1em}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.icon{width:18px;height:18px;fill:currentColor;flex:none;vertical-align:-3px}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--border)}
+.top .wrap{display:flex;align-items:center;gap:24px;height:64px}
+.brand{display:flex;align-items:baseline;gap:8px;color:var(--text);white-space:nowrap}
+.brand:hover{text-decoration:none}
+.brand b{font-size:1.3rem;font-weight:500}
+.brand span{color:var(--text2);font-size:.95rem}
+nav.links{display:flex;height:100%;overflow-x:auto;flex:1;scrollbar-width:none;justify-content:flex-end}
+nav.links::-webkit-scrollbar{display:none}
+nav.links a{display:flex;align-items:center;padding:0 14px;color:var(--text2);font-weight:500;font-size:.95rem;white-space:nowrap;border-bottom:3px solid transparent;border-top:3px solid transparent}
+nav.links a:hover{color:var(--text);text-decoration:none;background:var(--surface)}
+nav.links a.on{color:var(--primary);border-bottom-color:var(--primary)}
+.icon-btn{border:0;background:none;border-radius:50%;width:40px;height:40px;cursor:pointer;display:grid;place-items:center;color:var(--text2);flex:none}
+.icon-btn:hover{background:var(--surface2)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 24px;border-radius:20px;font-weight:500;font-size:.95rem;border:1px solid transparent;cursor:pointer}
+.btn:hover{text-decoration:none}
+.btn.filled{background:var(--primary);color:var(--on-primary)}
+.btn.filled:hover{background:var(--primary-hover);box-shadow:var(--elev)}
+.btn.outlined{border-color:var(--border);color:var(--primary);background:var(--bg)}
+.btn.outlined:hover{background:var(--tint)}
+.tbtn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:18px;border:0;background:none;color:var(--primary);font-weight:500;font-size:.9rem;cursor:pointer}
+.tbtn:hover{background:var(--tint);text-decoration:none}
+
+/* photos: initials sit underneath; the photo fades in over them once it loads */
+.ph{position:relative;display:inline-block;border-radius:50%;overflow:hidden;flex:none;background:var(--surface2);transition:transform .2s,box-shadow .2s}
+.ph::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 1px var(--ring);pointer-events:none}
+.ph .ini{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-weight:500}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;opacity:0;transition:opacity .35s}
+.ph img.ok{opacity:1}
+.ph.lg{box-shadow:0 0 0 4px var(--bg),0 0 0 5px var(--border)}
+
+/* hero */
+.hero{padding:64px 0 56px;background:var(--bg)}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.2rem,4.6vw,3.4rem);letter-spacing:-.5px}
+.hero .sub{color:var(--text2);font-size:1.15rem;margin:18px 0 30px;max-width:34em;line-height:1.7}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.faces{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px}
+.faces h2{font-size:1rem;font-weight:500;color:var(--text2);margin-bottom:16px}
+.faces ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:18px 10px}
+.face{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;background:none;border:0;cursor:pointer;padding:8px 2px;border-radius:12px;text-align:center}
+.face:hover{background:var(--surface2)}
+.face:hover .ph{transform:translateY(-2px);box-shadow:var(--elev)}
+.face .n{font-size:.85rem;line-height:1.3;color:var(--text)}
+
+/* sections */
+section.block{padding:72px 0}
+section.alt{background:var(--surface)}
+.head{margin-bottom:32px}
+.head p{color:var(--text2);max-width:44em;margin:10px 0 0}
+
+/* people */
+.controls{display:flex;flex-direction:column;gap:16px;margin-bottom:8px}
+.searchbox{display:flex;align-items:center;gap:10px;max-width:560px;height:48px;padding:0 18px;border:1px solid var(--border);border-radius:24px;background:var(--bg)}
+.searchbox:focus-within{box-shadow:var(--elev);border-color:transparent}
+.searchbox svg{color:var(--text2)}
+.searchbox input{flex:1;min-width:0;border:0;outline:0;background:none;color:var(--text);font:inherit;font-size:1rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.fchip{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border:1px solid var(--border);border-radius:8px;background:var(--bg);cursor:pointer;font-size:.9rem;font-weight:500;color:var(--text2)}
+.fchip:hover{background:var(--surface2)}
+.fchip[aria-pressed="true"]{background:var(--tint);border-color:var(--tint);color:var(--tint-text)}
+.fchip[aria-pressed="true"]::before{content:"";width:14px;height:14px;background:currentColor;-webkit-mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>') center/contain no-repeat;mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>') center/contain no-repeat}
+.areafilter{font-size:.93rem;color:var(--text2);min-height:1.5em;margin-top:8px}
+.group-title{font-size:1.25rem;margin:32px 0 14px}
+.people{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.card{display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:box-shadow .2s}
+.card:hover{box-shadow:var(--elev)}
+.card-main{display:flex;gap:18px;align-items:flex-start;padding:20px 20px 8px;text-align:left;background:none;border:0;cursor:pointer;flex:1}
+.card .name{font-size:1.1rem;font-weight:500;line-height:1.3}
+.card .role{font-size:.85rem;color:var(--text2);margin-top:2px}
+.card .int{color:var(--text2);font-size:.9rem;margin-top:8px;line-height:1.5}
+.badge{display:inline-block;font-size:.72rem;font-weight:500;color:var(--warn);background:var(--warn-bg);border-radius:4px;padding:1px 6px;margin-left:8px;vertical-align:2px}
+.card-actions{display:flex;gap:4px;padding:4px 8px 10px 8px;border-top:1px solid transparent;flex-wrap:wrap}
+.empty{padding:40px;text-align:center;color:var(--text2);border:1px dashed var(--border);border-radius:12px}
+
+/* dialog */
+dialog.sheet{border:0;padding:0;margin:0 0 0 auto;height:100%;max-height:100%;width:min(600px,100%);background:var(--bg);color:var(--text);box-shadow:var(--elev)}
+dialog.sheet::backdrop{background:var(--scrim)}
+dialog.sheet[open]{animation:slide .25s cubic-bezier(.2,0,0,1)}
+@keyframes slide{from{transform:translateX(48px);opacity:0}to{transform:none;opacity:1}}
+.sheet-inner{padding:calc(16px + env(safe-area-inset-top,0px)) 32px calc(40px + env(safe-area-inset-bottom,0px));overflow-y:auto;height:100%}
+.sheet-bar{display:flex;justify-content:flex-end;position:sticky;top:0;margin:0 -16px 0 0;z-index:1}
+.sheet-bar .icon-btn{background:var(--bg)}
+.sheet .who-head{display:flex;gap:24px;align-items:center}
+.sheet h2{font-size:1.75rem}
+.sheet .role{color:var(--text2);margin-top:2px}
+.sheet h3{font-size:.95rem;font-weight:500;color:var(--text2);margin:28px 0 8px}
+.sheet ul{padding-left:1.1em;margin:0}
+.sheet li{margin-bottom:8px}
+.sheet .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.linkrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.contact dl{display:grid;grid-template-columns:auto 1fr;gap:6px 20px;margin:0}
+.contact dt{color:var(--text2)}
+.contact dd{margin:0}
+
+/* seminars */
+.talks{list-style:none;margin:0;padding:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--bg)}
+.talk+.talk{border-top:1px solid var(--border)}
+.talk button{display:grid;grid-template-columns:130px 1fr 24px;gap:20px;width:100%;text-align:left;background:none;border:0;padding:18px 20px;cursor:pointer;align-items:center}
+.talk button:hover{background:var(--surface)}
+.talk .d{color:var(--text2);font-size:.88rem;line-height:1.4}
+.talk .t{font-size:1.02rem;font-weight:500;line-height:1.4}
+.talk .s{display:block;font-weight:400;font-size:.9rem;color:var(--text2);margin-top:2px}
+.talk .chev{color:var(--text2);transition:transform .2s}
+.talk button[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.talk .ab{padding:0 20px 20px 170px;color:var(--text2);max-width:64em}
+.talk .ab[hidden]{display:none}
+.note{margin-top:18px;color:var(--text2);font-size:.93rem}
+
+/* students/alumni */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.panel{border:1px solid var(--border);border-radius:12px;padding:20px 24px;background:var(--bg)}
+.panel h3{margin-bottom:8px}
+.plain{list-style:none;padding:0;margin:0}
+.plain li{padding:10px 0;border-bottom:1px solid var(--border)}
+.plain li:last-child{border-bottom:0}
+.plain .meta{display:block;color:var(--text2);font-size:.88rem}
+.ug{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.ug a,.ug span{display:inline-flex;align-items:center;gap:6px;height:32px;border:1px solid var(--border);background:var(--bg);border-radius:16px;padding:0 12px;font-size:.88rem;color:var(--text)}
+.ug a:hover{background:var(--surface2);text-decoration:none}
+.ug em{color:var(--text2);font-style:normal}
+
+footer{background:var(--surface);border-top:1px solid var(--border);padding:40px 0 48px;color:var(--text2);font-size:.92rem}
+footer .wrap{display:grid;grid-template-columns:1.5fr 1fr;gap:32px}
+footer b{color:var(--text);font-weight:500}
+footer .fl a{display:block;margin-bottom:6px}
+
+@media (max-width:960px){
+  .hero .wrap{grid-template-columns:1fr;gap:40px}
+  .cols,footer .wrap{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .brand span{display:none}
+  .hero{padding:40px 0}
+  .faces{padding:18px}
+  .faces ul{grid-template-columns:repeat(3,1fr)}
+  section.block{padding:52px 0}
+  .people{grid-template-columns:1fr}
+  .talk button{grid-template-columns:1fr 24px;gap:4px 12px;padding:16px}
+  .talk .d{grid-column:1/-1}
+  .talk .ab{padding:0 16px 18px}
+  .sheet-inner{padding-left:20px;padding-right:20px}
+  .sheet .who-head{gap:16px}
+}
+.hrow{display:flex;align-items:center;gap:4px 12px;flex-wrap:wrap}
+.hrow h3{margin:0}
+.panel .hrow{margin-bottom:8px}
+.faces .hrow{margin-bottom:16px}
+.faces .hrow h2{margin:0}
+.upc{display:inline-block;font-size:.72rem;font-weight:500;color:var(--tint-text);background:var(--tint);border-radius:4px;padding:1px 6px;margin-top:4px}
+/*admin*/ /* editor only: removed from the downloaded page */
+.edit{display:none}
+body.admin .edit{display:inline-flex}
+body.admin{padding-bottom:96px}
+.adminbar{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;display:flex;align-items:center;justify-content:center;gap:2px;flex-wrap:wrap;width:max-content;max-width:calc(100% - 32px);padding:6px 8px 6px 18px;background:var(--bg);border:1px solid var(--border);border-radius:28px;box-shadow:var(--elev)}
+.adminbar[hidden]{display:none}
+.ab-status{display:inline-flex;align-items:center;gap:8px;margin-right:8px;font-size:.88rem;color:var(--text2);white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--border);flex:none}
+.dot.on{background:var(--warn)}
+dialog.wide{width:min(760px,100%)}
+.muted{color:var(--text2);font-size:.93rem}
+.adm-tabs{margin:20px 0 28px}
+.adm-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.sheet .adm-top h3,.sheet h3.adm-h{margin:0;font-size:1.25rem;font-weight:400;color:var(--text)}
+.count{color:var(--text2);font-size:.9rem;margin-left:6px}
+.btn.sm{height:36px;padding:0 18px}
+.searchbox.sm{height:40px;max-width:none;margin-bottom:12px}
+.sheet ul.alist{list-style:none;margin:0;padding:0;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.sheet .alist li{margin:0}
+.arow{display:flex;align-items:center;gap:12px;padding:8px 6px 8px 16px}
+.arow+.arow{border-top:1px solid var(--border)}
+.arow:hover{background:var(--surface)}
+.ainfo{flex:1;min-width:0;cursor:pointer}
+.at,.am{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.at{font-weight:500}
+.am{color:var(--text2);font-size:.85rem}
+.aact{display:flex;flex:none}
+.aact .icon-btn{width:36px;height:36px}
+.aact .icon-btn:disabled{opacity:.3;cursor:default;background:none}
+.aact .tbtn{height:32px}
+.back{margin:0 0 12px -12px}
+.fld{margin-bottom:18px}
+.fld>label,.fld>.lbl{display:block;font-size:.85rem;font-weight:500;color:var(--text2);margin-bottom:6px}
+.inp{display:block;width:100%;min-height:40px;padding:8px 12px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font:inherit;font-size:.95rem}
+.inp:focus{outline:2px solid var(--primary);outline-offset:-1px}
+textarea.inp{resize:vertical;line-height:1.5}
+select.inp{height:40px;padding:0 12px}
+.hint{font-size:.8rem;color:var(--text2);margin-top:4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.ck{position:relative}
+.ck input{position:absolute;opacity:0;pointer-events:none}
+.ck:has(input:checked){background:var(--tint);border-color:var(--tint);color:var(--tint-text)}
+.ck:has(input:focus-visible){outline:2px solid var(--primary);outline-offset:2px}
+.phed{display:flex;gap:16px;align-items:flex-start}
+.phrows{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+.phrow{display:flex;gap:4px;align-items:center}
+.phup{flex:1;display:flex;align-items:center;height:40px;padding:0 12px;border:1px dashed var(--border);border-radius:8px;color:var(--text2);font-size:.9rem}
+.phbtns{display:flex;gap:4px;flex-wrap:wrap;margin-left:-12px}
+.formbar{position:sticky;bottom:calc(-40px - env(safe-area-inset-bottom,0px));display:flex;gap:12px;padding:16px 0 calc(56px + env(safe-area-inset-bottom,0px));margin:8px 0 calc(-40px - env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--border)}
+.pub{border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.pub h3{margin:0 0 6px!important;color:var(--text)!important;font-size:1rem!important}
+.pub .cta{margin-top:14px}
+@media (max-width:640px){
+  .two{grid-template-columns:1fr}
+  .ab-status{width:100%;justify-content:center;margin:2px 0}
+  .adminbar{padding:6px 8px;border-radius:20px}
+  .phed{flex-direction:column}
+}
+/*/admin*/
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><b>Theory Group</b><span>CSE, IIT Bombay</span></a>
+    <nav class="links" aria-label="Sections">
+      <a href="#people">People</a><a href="#seminars">Seminars</a><a href="#students">Students</a><a href="#alumni">Alumni</a><a href="#contact">Contact</a>
+    </nav>
+    <button class="icon-btn" id="themeBtn" aria-label="Switch between light and dark theme" title="Switch theme">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-3.14-9.8A9.3 9.3 0 0 0 12 3z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1 data-text="heroTitle">Theoretical Computer Science at IIT Bombay</h1>
+        <p class="sub" data-text="heroSub">The Theory Group in the Department of Computer Science and Engineering works on algorithms, computational complexity, algebraic computation, cryptography, coding theory, computational geometry, graph theory and logic.</p>
+        <div class="cta">
+          <a class="btn filled" href="#people">Meet the faculty</a>
+          <a class="btn outlined" href="#seminars">Seminar talks</a>
+          <!--admin--><button class="tbtn edit" data-edit="site">Edit text</button><!--/admin-->
+        </div>
+      </div>
+      <div class="faces">
+        <div class="hrow"><h2>Core faculty</h2><!--admin--><button class="tbtn edit" data-edit="people">Edit</button><!--/admin--></div>
+        <ul id="faces"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="people">
+    <div class="wrap">
+      <div class="head"><div class="hrow"><h2>People</h2><!--admin--><button class="tbtn edit" data-edit="people">Edit people</button><!--/admin--></div><p data-text="peopleIntro">Core theory faculty, colleagues in logic and verification who work closely with the group, visitors, and past members.</p></div>
+      <div class="controls">
+        <label class="searchbox">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          <input id="search" type="search" placeholder="Search by name or topic, such as lattices or matching" aria-label="Search faculty">
+        </label>
+        <div class="chips" id="tabs" role="group" aria-label="Filter by group"></div>
+      </div>
+      <div class="areafilter" id="areafilter" aria-live="polite"></div>
+      <div id="peopleOut"></div>
+    </div>
+  </section>
+
+  <section class="block alt" id="seminars">
+    <div class="wrap">
+      <div class="head"><div class="hrow"><h2>Theory seminar</h2><!--admin--><button class="tbtn edit" data-edit="talks">Edit talks</button><!--/admin--></div><p data-text="seminarIntro">Talks by visitors and group members, usually in CC 109 of the new CSE building or online. Select a talk to read a short summary.</p></div>
+      <ul class="talks" id="talks"></ul>
+      <p class="note" data-html="seminarNote">Talks are announced on the <a href="http://miller.cse.iitb.ac.in/mailman/listinfo/theory-seminar">theory-seminar mailing list</a>. The full archive back to 2017 is on the <a href="https://www.cse.iitb.ac.in/~theory/seminar.html">previous seminar page</a>.</p>
+    </div>
+  </section>
+
+  <section class="block" id="students">
+    <div class="wrap">
+      <div class="head"><h2>Students and postdocs</h2></div>
+      <div class="cols">
+        <div class="panel"><div class="hrow"><h3>Ph.D. students</h3><!--admin--><button class="tbtn edit" data-edit="phd">Edit</button><!--/admin--></div><ul class="plain" id="phd"></ul></div>
+        <div class="panel"><div class="hrow"><h3>Past postdocs</h3><!--admin--><button class="tbtn edit" data-edit="postdocs">Edit</button><!--/admin--></div><ul class="plain" id="postdocs"></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block alt" id="alumni">
+    <div class="wrap">
+      <div class="head"><h2>Alumni</h2><p data-text="alumniIntro">Ph.D. graduates of the group, and IIT Bombay undergraduates who went on to work in theoretical computer science.</p></div>
+      <div class="panel"><div class="hrow"><h3>Ph.D. alumni</h3><!--admin--><button class="tbtn edit" data-edit="phdAlumni">Edit</button><!--/admin--></div><ul class="plain" id="phdAlumni"></ul></div>
+      <div class="hrow" style="margin:40px 0 14px"><h3>Undergraduate alumni</h3><!--admin--><button class="tbtn edit" data-edit="ug">Edit</button><!--/admin--></div>
+      <label class="searchbox">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <input id="ugSearch" type="search" placeholder="Search by name or institution" aria-label="Search undergraduate alumni">
+      </label>
+      <div class="ug" id="ug"></div>
+      <p class="note" data-html="alumniNote">This list is incomplete. To report an error or omission, please write to the group.</p>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <p data-html="footerAddress"><b>Theory Group, Department of Computer Science and Engineering</b><br>
+Indian Institute of Technology Bombay, Powai, Mumbai 400 076<br>
+Main office: Kanwal Rekhi Building. Phone +91 22 2576 7901 / 7902</p>
+      <p data-text="footerNote">To email a faculty member, add @cse.iitb.ac.in to their username. To call, dial +91 22 2576 followed by their extension.</p>
+      <!--admin--><button class="tbtn edit" data-edit="site" style="margin-left:-12px">Edit footer text</button><!--/admin-->
+    </div>
+    <div class="fl"><div id="footerLinks"></div><!--admin--><button class="tbtn edit" data-edit="footerLinks" style="margin-left:-12px">Edit links</button><!--/admin--></div>
+  </div>
+</footer>
+
+<dialog class="sheet" id="sheet" aria-labelledby="sheetName"><div class="sheet-inner" id="sheetBody"></div></dialog>
+
+<!--admin-->
+<dialog class="sheet wide" id="adm" aria-labelledby="admTitle"><div class="sheet-inner" id="admInner">
+  <div class="sheet-bar"><button class="icon-btn" id="admClose" aria-label="Close editor"><svg class="icon" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button></div>
+  <h2 id="admTitle">Edit site</h2>
+  <p class="muted" style="margin-top:6px">Changes appear on the page as you save them and are kept as a draft in this browser. Use Publish to get the updated file.</p>
+  <div class="chips adm-tabs" id="admTabs" role="group" aria-label="What to edit"></div>
+  <div id="admBody"></div>
+</div></dialog>
+<div class="adminbar" id="adminbar" hidden>
+  <span class="ab-status"><span class="dot" id="abDot"></span><span id="abText">No changes</span></span>
+  <button class="tbtn" data-edit="people">Edit content</button>
+  <button class="tbtn" data-edit="publish">Publish</button>
+</div>
+<!--/admin-->
+
+<script type="application/json" id="site-data">
+{
+ "site": {
+  "heroTitle": "Theoretical Computer Science at IIT Bombay",
+  "heroSub": "The Theory Group in the Department of Computer Science and Engineering works on algorithms, computational complexity, algebraic computation, cryptography, coding theory, computational geometry, graph theory and logic.",
+  "peopleIntro": "Core theory faculty, colleagues in logic and verification who work closely with the group, visitors, and past members.",
+  "seminarIntro": "Talks by visitors and group members, usually in CC 109 of the new CSE building or online. Select a talk to read a short summary.",
+  "seminarNote": "Talks are announced on the \u003ca href=\"http://miller.cse.iitb.ac.in/mailman/listinfo/theory-seminar\">theory-seminar mailing list\u003c/a>. The full archive back to 2017 is on the \u003ca href=\"https://www.cse.iitb.ac.in/~theory/seminar.html\">previous seminar page\u003c/a>.",
+  "alumniIntro": "Ph.D. graduates of the group, and IIT Bombay undergraduates who went on to work in theoretical computer science.",
+  "alumniNote": "This list is incomplete. To report an error or omission, please write to the group.",
+  "footerAddress": "\u003cb>Theory Group, Department of Computer Science and Engineering\u003c/b>\u003cbr>\nIndian Institute of Technology Bombay, Powai, Mumbai 400 076\u003cbr>\nMain office: Kanwal Rekhi Building. Phone +91 22 2576 7901 / 7902",
+  "footerNote": "To email a faculty member, add @cse.iitb.ac.in to their username. To call, dial +91 22 2576 followed by their extension."
+ },
+ "areas": [
+  {
+   "key": "alg",
+   "name": "Algorithms & optimization"
+  },
+  {
+   "key": "cplx",
+   "name": "Complexity & derandomization"
+  },
+  {
+   "key": "crypt",
+   "name": "Cryptography"
+  },
+  {
+   "key": "code",
+   "name": "Coding theory & pseudorandomness"
+  },
+  {
+   "key": "graph",
+   "name": "Graph theory & combinatorics"
+  },
+  {
+   "key": "geo",
+   "name": "Computational geometry"
+  },
+  {
+   "key": "game",
+   "name": "Games & markets"
+  },
+  {
+   "key": "logic",
+   "name": "Logic, automata & games"
+  },
+  {
+   "key": "learn",
+   "name": "Learning theory"
+  }
+ ],
+ "people": [
+  {
+   "id": "adsul",
+   "name": "Bharat Adsul",
+   "group": "core",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/adsul.jpg"
+   ],
+   "interests": "Formal methods in concurrency, logics and games, geometric complexity theory.",
+   "areas": [
+    "logic",
+    "cplx",
+    "game"
+   ],
+   "email": "adsul@cse.iitb.ac.in",
+   "ext": "7712",
+   "office": "CC 317, Computing Complex",
+   "homepage": "https://www.cse.iitb.ac.in/~adsul/",
+   "links": [
+    {
+     "label": "DBLP",
+     "url": "http://dblp.uni-trier.de/pers/hd/a/Adsul:Bharat"
+    },
+    {
+     "label": "Google Scholar",
+     "url": "https://scholar.google.co.in/citations?user=bZhCDxIAAAAJ"
+    }
+   ],
+   "bio": [
+    "B.Tech. in Computer Science from IIT Bombay (1997).",
+    "Works at the meeting point of logic, concurrency and algebraic approaches to complexity; with Sohoni and collaborators, gave a polynomial-time algorithm for rank-1 bimatrix games."
+   ],
+   "papers": [
+    "Rank-1 bimatrix games: a homeomorphism and a polynomial time algorithm. STOC 2011. With J. Garg, R. Mehta, M. Sohoni.",
+    "A generalization of the Łoś–Tarski preservation theorem. Ann. Pure Appl. Logic, 2016. With A. Sankaran, S. Chakraborty.",
+    "Incorporating sharp features in the general solid sweep framework. Comput. Graph. Forum, 2016. With J. Machchhar, M. Sohoni.",
+    "Complete and tractable local linear time temporal logics over traces. ICALP 2002. With M. Sohoni."
+   ]
+  },
+  {
+   "id": "vishwas",
+   "name": "Vishwas Bhargava",
+   "group": "core",
+   "title": "Assistant Professor",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/vishwas.jpg"
+   ],
+   "interests": "Computational complexity, algebraic complexity, pseudorandomness and derandomization, computational number theory.",
+   "areas": [
+    "cplx",
+    "code"
+   ],
+   "email": "vishwas@cse.iitb.ac.in",
+   "ext": "7732",
+   "office": "CC 313, Computing Complex",
+   "homepage": "https://www.cse.iitb.ac.in/~vishwas/",
+   "links": [
+    {
+     "label": "DBLP",
+     "url": "https://dblp.org/pid/194/9003.html"
+    }
+   ],
+   "bio": [
+    "Ph.D. from Rutgers University, advised by Shubhangi Saraf.",
+    "Postdoctoral work including a CMI Postdoctoral Fellowship at Caltech, before joining IIT Bombay.",
+    "Interested in problems with an algebraic or number-theoretic flavour: factoring sparse polynomials, reconstructing arithmetic circuits, multipoint evaluation."
+   ],
+   "papers": [
+    "Linear independence, alternants, and applications. STOC 2023. With S. Saraf, I. Volkovich.",
+    "Fast, algebraic multivariate multipoint evaluation in small characteristic and applications. J. ACM 2023. With S. Ghosh, M. Kumar, C. K. Mohapatra.",
+    "Deterministic factorization of sparse polynomials with bounded individual degree. FOCS 2018; J. ACM 2020. With S. Saraf, I. Volkovich.",
+    "Reconstruction of depth-4 multilinear circuits. SODA 2020. With S. Saraf, I. Volkovich.",
+    "A deterministic PTAS for the algebraic rank of bounded degree polynomials. SODA 2019. With M. Bläser, G. Jindal, A. Pandey."
+   ]
+  },
+  {
+   "id": "sujoy",
+   "name": "Sujoy Bhore",
+   "group": "core",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/sujoy.jpg",
+    "https://www.cse.iitb.ac.in/~theory/img/sujoy.jpg"
+   ],
+   "interests": "Discrete and computational geometry, algorithms under uncertainty, graph theory, algorithmic robotics.",
+   "areas": [
+    "geo",
+    "alg",
+    "graph"
+   ],
+   "email": "sujoy@cse.iitb.ac.in",
+   "ext": "7715",
+   "office": "CC 318, Computing Complex",
+   "homepage": "https://sites.google.com/view/homepage-of-sujoy-bhore/home",
+   "links": [
+    {
+     "label": "DBLP",
+     "url": "https://dblp.org/pid/157/6058.html"
+    },
+    {
+     "label": "Google Scholar",
+     "url": "https://scholar.google.co.il/citations?user=94KJ_A0AAAAJ&hl=en"
+    }
+   ],
+   "bio": [
+    "Works on geometric spanners, metric embeddings, graph drawing and online algorithms in metric spaces."
+   ],
+   "papers": [
+    "Online duet between metric embeddings and minimum-weight perfect matchings. SODA 2024. With A. Filtser, C. Tóth.",
+    "Online spanners in metric spaces. SIAM J. Discrete Math., 2024. With A. Filtser, H. Khodabandeh, C. Tóth.",
+    "Extending orthogonal planar graph drawings is fixed-parameter tractable. SoCG 2023. With R. Ganian, L. Khazaliya, F. Montecchiani, M. Nöllenburg.",
+    "Euclidean Steiner spanners: light and sparse. SIAM J. Discrete Math., 2022. With C. Tóth.",
+    "Light Euclidean Steiner spanners in the plane. SoCG 2021. With C. Tóth."
+   ]
+  },
+  {
+   "id": "rgurjar",
+   "name": "Rohit Gurjar",
+   "group": "core",
+   "title": "",
+   "note": "On leave",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/rgurjar.jpg",
+    "https://www.cse.iitb.ac.in/~theory/img/rohit.jpg"
+   ],
+   "interests": "Computational complexity, derandomization and pseudorandomness, polyhedral combinatorics, parallel algorithms.",
+   "areas": [
+    "cplx",
+    "alg",
+    "graph"
+   ],
+   "email": "rgurjar@cse.iitb.ac.in",
+   "ext": "7745",
+   "office": "CC 315, Computing Complex",
+   "homepage": "https://www.cse.iitb.ac.in/~rgurjar/",
+   "links": [
+    {
+     "label": "DBLP",
+     "url": "http://dblp.uni-trier.de/pers/hd/g/Gurjar:Rohit"
+    },
+    {
+     "label": "Google Scholar",
+     "url": "https://scholar.google.co.in/citations?user=dtbKJVUAAAAJ"
+    }
+   ],
+   "bio": [
+    "Known for showing, with Fenner and Thierauf, that bipartite perfect matching is in quasi-NC, via a geometric approach to derandomizing the isolation lemma."
+   ],
+   "papers": [
+    "Bipartite perfect matching is in quasi-NC. STOC 2016. With S. Fenner, T. Thierauf.",
+    "Linear matroid intersection is in quasi-NC. STOC 2017. With T. Thierauf.",
+    "Isolating a vertex via lattices: polytopes with totally unimodular faces. ICALP 2018. With N. K. Vishnoi, T. Thierauf.",
+    "Identity testing for constant-width, and commutative, read-once oblivious ABPs. CCC 2016. With A. Korwar, N. Saxena."
+   ]
+  },
+  {
+   "id": "ckamath",
+   "name": "Chethan Kamath",
+   "group": "core",
+   "title": "Assistant Professor",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/ckamath.jpg"
+   ],
+   "interests": "Foundations of cryptography, total search problems, proof systems, and complexity theory.",
+   "areas": [
+    "crypt",
+    "cplx"
+   ],
+   "email": "ckamath@cse.iitb.ac.in",
+   "ext": "7713",
+   "office": "CC 305, Computing Complex",
+   "homepage": "https://www.cse.iitb.ac.in/~ckamath/",
+   "links": [
+    {
+     "label": "DBLP",
+     "url": "https://dblp.org/pid/121/9587.html"
+    }
+   ],
+   "bio": [
+    "Ph.D. from IST Austria, advised by Krzysztof Pietrzak; thesis on the average-case hardness of total search problems.",
+    "Master's in CS from IISc Bangalore; postdoc at Tel Aviv University with Nir Bitansky and Omer Paneth.",
+    "Joined IIT Bombay in February 2024; member of the Theory Group and the IITB Trust Lab."
+   ],
+   "papers": [
+    "Batch proofs are statistically hiding. 2023. With N. Bitansky, O. Paneth, R. Rothblum, P. N. Vasudevan.",
+    "(Verifiable) delay functions from Lucas sequences. TCC 2023. With C. Hoffmann, P. Hubáček, T. Krňák.",
+    "Certifying giant nonprimes. PKC 2023. With C. Hoffmann, P. Hubáček, K. Pietrzak.",
+    "On treewidth, separators and Yao's garbling. TCC 2021. With K. Klein, K. Pietrzak.",
+    "Adaptively secure proxy re-encryption. PKC 2019. With G. Fuchsbauer, K. Klein, K. Pietrzak."
+   ]
+  },
+  {
+   "id": "akash",
+   "name": "Akash Kumar",
+   "group": "core",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/akash.jpg",
+    "https://www.cse.iitb.ac.in/~theory/img/akash.png"
+   ],
+   "interests": "Property testing, spectral graph theory and spectral algorithms, planar graph algorithms, recovering planted structure.",
+   "areas": [
+    "graph",
+    "alg"
+   ],
+   "email": "akash@cse.iitb.ac.in",
+   "ext": "7722",
+   "office": "CC 219, Computing Complex",
+   "homepage": "https://sites.google.com/view/kumarakash/home/",
+   "links": [
+    {
+     "label": "DBLP",
+     "url": "https://dblp.org/pid/140/9567-3.html"
+    },
+    {
+     "label": "Google Scholar",
+     "url": "https://scholar.google.co.in/citations?user=L358DvgAAAAJ"
+    }
+   ],
+   "bio": [
+    "Works on sublinear-time algorithms for graphs, including testers for minor-closed properties and partition oracles."
+   ],
+   "papers": [
+    "Random walks and forbidden minors I: an n^{1/2+o(1)}-query one-sided tester for minor-closed properties on bounded degree graphs. FOCS 2018. With C. Seshadhri, A. Stolman.",
+    "Random walks and forbidden minors III: poly(d/ε)-time partition oracles for minor-free graph classes. FOCS 2021. With C. Seshadhri, A. Stolman.",
+    "The complexity of testing all properties of planar graphs, and the role of isomorphism. SODA 2022. With S. Basu, C. Seshadhri.",
+    "Learning hierarchical cluster structure of graphs in sublinear time. SODA 2023. With M. Kapralov, S. Lattanzi, A. Mousavifar."
+   ]
+  },
+  {
+   "id": "mp",
+   "name": "Manoj Prabhakaran",
+   "group": "core",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/mp.jpg",
+    "https://www.cse.iitb.ac.in/~theory/img/mp.jpg"
+   ],
+   "interests": "Theoretical and applied cryptography, information theory, coding theory and complexity theory.",
+   "areas": [
+    "crypt",
+    "cplx",
+    "code"
+   ],
+   "email": "mp@cse.iitb.ac.in",
+   "ext": "7709",
+   "office": "CC 214, Computing Complex",
+   "homepage": "https://www.cse.iitb.ac.in/~mp",
+   "links": [
+    {
+     "label": "DBLP",
+     "url": "http://dblp.uni-trier.de/pers/hd/p/Prabhakaran:Manoj"
+    },
+    {
+     "label": "Google Scholar",
+     "url": "https://scholar.google.com/citations?user=FANRIhwAAAAJ"
+    }
+   ],
+   "bio": [
+    "B.Tech. in Computer Science from IIT Bombay (2000).",
+    "Works on secure computation, cryptographic agents and information-theoretic aspects of cryptography; co-guides students at the IITB Trust Lab."
+   ],
+   "papers": [
+    "Circuits resilient to additive attacks with applications to secure computation. STOC 2014. With D. Genkin, Y. Ishai, A. Sahai, E. Tromer.",
+    "Towards a unified theory of cryptographic agents. EUROCRYPT 2015. With S. Agrawal, S. Agrawal.",
+    "Rényi information complexity and an information theoretic characterization of the partition bound. ICALP 2016. With V. Prabhakaran.",
+    "On the power of public-key encryption in secure computation. TCC 2014. With M. Mahmoody, H. Maji.",
+    "On fair exchange, fair coins and fair sampling. CRYPTO 2013. With S. Agrawal."
+   ]
+  },
+  {
+   "id": "sruthi",
+   "name": "Sruthi Sekar",
+   "group": "core",
+   "title": "Assistant Professor",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/sruthi.jpg"
+   ],
+   "interests": "Cryptography and related areas of theoretical computer science: non-malleable codes, leakage-resilient secret sharing, succinct arguments.",
+   "areas": [
+    "crypt",
+    "code"
+   ],
+   "email": "sruthi@cse.iitb.ac.in",
+   "ext": "7138",
+   "office": "CC 213, Computing Complex",
+   "homepage": "https://sruthisekar.in/",
+   "links": [
+    {
+     "label": "Google Scholar",
+     "url": "https://scholar.google.com/citations?user=Oo8c288AAAAJ&hl=en"
+    }
+   ],
+   "bio": [
+    "B.Sc. in Mathematics from Lady Shri Ram College, Delhi; M.S. in Mathematics from IISc Bangalore.",
+    "Ph.D. from IISc, advised by Bhavana Kanukurthi and Manjunath Krishnapur; the thesis received an ACM India Doctoral Dissertation honourable mention.",
+    "Postdoctoral researcher at UC Berkeley with Sanjam Garg (2021–2024); joined IIT Bombay in 2024 and is the current PI of the IITB Trust Lab."
+   ],
+   "papers": [
+    "SublonK: sublinear prover PlonK. PoPETs 2024. With A. R. Choudhuri, S. Garg, A. Goel, R. Sinha and others.",
+    "Short leakage resilient and non-malleable secret sharing schemes. CRYPTO 2022. With N. Chandran, B. Kanukurthi and others.",
+    "Four-state non-malleable codes with explicit constant rate. TCC 2017. With B. Kanukurthi, S. L. B. Obbattu."
+   ]
+  },
+  {
+   "id": "sohoni",
+   "name": "Milind Sohoni",
+   "group": "core",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/sohoni.jpg",
+    "https://www.cse.iitb.ac.in/~theory/img/sohoni.jpg"
+   ],
+   "interests": "Combinatorial optimization, mathematical programming, algorithms, geometric complexity theory.",
+   "areas": [
+    "alg",
+    "game",
+    "cplx"
+   ],
+   "email": "sohoni@cse.iitb.ac.in",
+   "ext": "7729",
+   "office": "CC 311, Computing Complex",
+   "homepage": "https://www.cse.iitb.ac.in/~sohoni/",
+   "links": [
+    {
+     "label": "DBLP",
+     "url": "http://dblp.uni-trier.de/pers/hd/s/Sohoni:Milind_A="
+    }
+   ],
+   "bio": [
+    "B.Tech. in Computer Science from IIT Bombay (1986).",
+    "Co-founder, with Ketan Mulmuley, of Geometric Complexity Theory, an approach to P vs NP through algebraic geometry and representation theory.",
+    "Also works on algorithms for market equilibria, and on technology for development."
+   ],
+   "papers": [
+    "Geometric complexity theory II: towards explicit obstructions for embeddings among class varieties. SIAM J. Computing, 2008. With K. Mulmuley.",
+    "A complementary pivot algorithm for market equilibrium under separable, piecewise-linear concave utilities. STOC 2012. With J. Garg, R. Mehta, V. V. Vazirani.",
+    "Towards polynomial simplex-like algorithms for market equilibria. SODA 2013. With J. Garg, R. Mehta, N. K. Vishnoi.",
+    "A theory of regular MSC languages. Information & Computation, 2005. With J. G. Henriksen, M. Mukund, K. Narayan Kumar, P. S. Thiagarajan."
+   ]
+  },
+  {
+   "id": "shashanks",
+   "name": "Shashank Srivastava",
+   "group": "core",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/shashanks.jpg"
+   ],
+   "interests": "Coding theory, pseudorandomness, spectral algorithms, combinatorics.",
+   "areas": [
+    "code",
+    "graph",
+    "alg"
+   ],
+   "email": "shashanks@cse.iitb.ac.in",
+   "ext": "7907",
+   "office": "KR 316, Kanwal Rekhi Building",
+   "homepage": "https://sites.google.com/view/shashanks/home",
+   "links": [
+    {
+     "label": "Google Scholar",
+     "url": "https://scholar.google.com/citations?user=2PbjbggAAAAJ&hl=en"
+    }
+   ],
+   "bio": [
+    "Ph.D. from TTI Chicago, advised by Madhur Tulsiani; B.Tech. in Computer Science from IIT Kharagpur.",
+    "Before IIT Bombay, was at the Institute for Advanced Study. Uses convex hierarchies such as sum-of-squares to design decoding algorithms for codes built from expanders."
+   ],
+   "papers": [
+    "List decoding of Tanner and expander amplified codes from distance certificates. With F. G. Jeronimo, M. Tulsiani.",
+    "Work on hypergraph expansion, CSPs and decoding of direct-sum codes. With V. L. Alev, F. G. Jeronimo, D. Quintana, M. Tulsiani."
+   ]
+  },
+  {
+   "id": "sundar",
+   "name": "Sundar Vishwanathan",
+   "group": "core",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/sundar.jpg",
+    "https://www.cse.iitb.ac.in/~theory/img/sundar.jpg"
+   ],
+   "interests": "Algorithms, combinatorics, complexity theory.",
+   "areas": [
+    "alg",
+    "graph",
+    "cplx"
+   ],
+   "email": "sundar@cse.iitb.ac.in",
+   "ext": "7727",
+   "office": "KR G08, Kanwal Rekhi Building",
+   "homepage": "https://www.cse.iitb.ac.in/~sundar/",
+   "links": [
+    {
+     "label": "DBLP",
+     "url": "http://dblp.uni-trier.de/pers/hd/v/Vishwanathan:Sundar"
+    },
+    {
+     "label": "Google Scholar",
+     "url": "https://scholar.google.co.in/citations?user=8CK3IY4AAAAJ"
+    }
+   ],
+   "bio": [
+    "B.Tech. in Computer Science from IIT Bombay (1985).",
+    "Works on online and randomized algorithms, approximation, and combinatorics, including elegant counting proofs of classical results."
+   ],
+   "papers": [
+    "On randomized memoryless algorithms for the weighted k-server problem. FOCS 2013. With A. Chiplunkar.",
+    "Random walks, electric networks and the transience class problem of sandpiles. SODA 2012. With A. Choure.",
+    "On randomized algorithms for matching in the online preemptive model. ESA 2015. With A. Chiplunkar, S. Tirodkar.",
+    "A counting proof of the Graham–Pollak theorem. Discrete Mathematics, 2013."
+   ]
+  },
+  {
+   "id": "supratik",
+   "name": "Supratik Chakraborty",
+   "group": "logic",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/supratik.jpg"
+   ],
+   "interests": "Sampling and counting, formal methods, logic and automata; analysis and verification of digital systems.",
+   "areas": [
+    "logic"
+   ],
+   "email": "supratik@cse.iitb.ac.in",
+   "ext": "7721",
+   "office": "CC 314, Computing Complex",
+   "homepage": "https://www.cse.iitb.ac.in/~supratik",
+   "links": [],
+   "bio": [],
+   "papers": []
+  },
+  {
+   "id": "akshayss",
+   "name": "S. Akshay",
+   "group": "logic",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/~akshayss/pic2.jpg",
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/akshayss.jpg"
+   ],
+   "interests": "Formal methods, automata, timed and concurrent systems.",
+   "areas": [
+    "logic"
+   ],
+   "email": "akshayss@cse.iitb.ac.in",
+   "ext": "7711",
+   "office": "CC 507, Computing Complex",
+   "homepage": "https://www.cse.iitb.ac.in/~akshayss",
+   "links": [],
+   "bio": [],
+   "papers": []
+  },
+  {
+   "id": "krishnas",
+   "name": "Krishna S.",
+   "group": "logic",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/~krishnas/krish.jpg",
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/krishnas.jpg"
+   ],
+   "interests": "Automata theory, logics and games, analysis of concurrent programs.",
+   "areas": [
+    "logic"
+   ],
+   "email": "krishnas@cse.iitb.ac.in",
+   "ext": "4777",
+   "office": "CC 312, Computing Complex",
+   "homepage": "https://www.cse.iitb.ac.in/~krishnas",
+   "links": [],
+   "bio": [],
+   "papers": []
+  },
+  {
+   "id": "akg",
+   "name": "Ashutosh Gupta",
+   "group": "logic",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/akg.jpg"
+   ],
+   "interests": "Model checking for sequential and concurrent software, constraint solving, decision procedures and automated theorem proving.",
+   "areas": [
+    "logic"
+   ],
+   "email": "akg@cse.iitb.ac.in",
+   "ext": "7724",
+   "office": "CC 320, Computing Complex",
+   "homepage": "https://www.cse.iitb.ac.in/~akg",
+   "links": [],
+   "bio": [],
+   "papers": []
+  },
+  {
+   "id": "siva",
+   "name": "G. Sivakumar",
+   "group": "logic",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/siva.jpg"
+   ],
+   "interests": "Automated reasoning, logic programming, rewrite systems.",
+   "areas": [
+    "logic"
+   ],
+   "email": "siva@cse.iitb.ac.in",
+   "ext": "7725",
+   "office": "CC 508, Computing Complex",
+   "homepage": "https://www.cse.iitb.ac.in/~siva",
+   "links": [],
+   "bio": [],
+   "papers": []
+  },
+  {
+   "id": "pandya58",
+   "name": "Paritosh Pandya",
+   "group": "logic",
+   "title": "",
+   "note": "Adjunct",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/pandya58.jpg"
+   ],
+   "interests": "Logics, automata, concurrency, formal methods for embedded systems.",
+   "areas": [
+    "logic"
+   ],
+   "email": "pandya58@cse.iitb.ac.in",
+   "ext": "7733",
+   "office": "CC 216, Computing Complex",
+   "homepage": "",
+   "links": [],
+   "bio": [],
+   "papers": []
+  },
+  {
+   "id": "swaprava",
+   "name": "Swaprava Nath",
+   "group": "related",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/swaprava.jpg"
+   ],
+   "interests": "Game theory, algorithmic mechanism design, computational social choice.",
+   "areas": [
+    "game"
+   ],
+   "email": "swaprava@cse.iitb.ac.in",
+   "ext": "7755",
+   "office": "CC 209, Computing Complex",
+   "homepage": "https://www.cse.iitb.ac.in/~swaprava",
+   "links": [],
+   "bio": [],
+   "papers": []
+  },
+  {
+   "id": "avishek",
+   "name": "Avishek Ghosh",
+   "group": "related",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/avishek.jpg"
+   ],
+   "interests": "Optimization, online learning and multi-armed bandits, learning theory.",
+   "areas": [
+    "learn"
+   ],
+   "email": "avishek@cse.iitb.ac.in",
+   "ext": "7734",
+   "office": "KR 218, Kanwal Rekhi Building",
+   "homepage": "https://www.cse.iitb.ac.in/~avishek",
+   "links": [],
+   "bio": [],
+   "papers": []
+  },
+  {
+   "id": "surajs",
+   "name": "Suraj Shetiya",
+   "group": "related",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/surajs.jpg"
+   ],
+   "interests": "Computational geometry, fairness in databases.",
+   "areas": [
+    "geo"
+   ],
+   "email": "surajs@cse.iitb.ac.in",
+   "ext": "7133",
+   "office": "CC 304, Computing Complex",
+   "homepage": "https://www.cse.iitb.ac.in/~surajs",
+   "links": [],
+   "bio": [],
+   "papers": []
+  },
+  {
+   "id": "madhu",
+   "name": "Madhu Sudan",
+   "group": "visiting",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/~theory/img/madhu.jpg"
+   ],
+   "interests": "Gordon McKay Professor at Harvard University and N. R. Kamath Chair Professor at IIT Bombay. Coding theory, probabilistically checkable proofs, communication.",
+   "areas": [
+    "code",
+    "cplx"
+   ],
+   "email": "",
+   "ext": "",
+   "office": "",
+   "homepage": "http://madhu.seas.harvard.edu/",
+   "links": [],
+   "bio": [],
+   "papers": []
+  },
+  {
+   "id": "meel",
+   "name": "Kuldeep S. Meel",
+   "group": "visiting",
+   "title": "",
+   "note": "",
+   "photos": [],
+   "interests": "Constrained sampling and counting, SAT solving, formal verification of machine learning. B.Tech. from IIT Bombay (2012); now at Georgia Tech and the University of Toronto.",
+   "areas": [
+    "logic"
+   ],
+   "email": "",
+   "ext": "",
+   "office": "",
+   "homepage": "https://www.cs.toronto.edu/~meel/",
+   "links": [],
+   "bio": [],
+   "papers": []
+  },
+  {
+   "id": "gastin",
+   "name": "Paul Gastin",
+   "group": "visiting",
+   "title": "",
+   "note": "",
+   "photos": [],
+   "interests": "Formal methods for the verification of critical systems.",
+   "areas": [
+    "logic"
+   ],
+   "email": "",
+   "ext": "",
+   "office": "",
+   "homepage": "",
+   "links": [],
+   "bio": [],
+   "papers": []
+  },
+  {
+   "id": "aad",
+   "name": "Ajit A. Diwan",
+   "group": "former",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/~theory/img/aad.jpg",
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/aad.jpg"
+   ],
+   "interests": "Graph theory and combinatorics.",
+   "areas": [
+    "graph"
+   ],
+   "email": "",
+   "ext": "",
+   "office": "",
+   "homepage": "https://www.cse.iitb.ac.in/~aad/",
+   "links": [],
+   "bio": [],
+   "papers": []
+  },
+  {
+   "id": "ranade",
+   "name": "Abhiram Ranade",
+   "group": "former",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/~theory/img/ranade.jpg",
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/ranade.jpg"
+   ],
+   "interests": "Algorithms and combinatorial optimization.",
+   "areas": [
+    "alg"
+   ],
+   "email": "",
+   "ext": "",
+   "office": "",
+   "homepage": "https://www.cse.iitb.ac.in/~ranade/",
+   "links": [],
+   "bio": [],
+   "papers": []
+  },
+  {
+   "id": "nutan",
+   "name": "Nutan Limaye",
+   "group": "former",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/~theory/img/nutan.jpg",
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/nutan.jpg"
+   ],
+   "interests": "Algorithms and complexity theory, algebraic circuit lower bounds.",
+   "areas": [
+    "cplx"
+   ],
+   "email": "",
+   "ext": "",
+   "office": "",
+   "homepage": "https://www.cse.iitb.ac.in/~nutan/",
+   "links": [],
+   "bio": [],
+   "papers": []
+  },
+  {
+   "id": "mrinal",
+   "name": "Mrinal Kumar",
+   "group": "former",
+   "title": "",
+   "note": "",
+   "photos": [
+    "https://www.cse.iitb.ac.in/~theory/img/mrinal.jpg",
+    "https://www.cse.iitb.ac.in/assets/images/people/faculty/mrinal.jpg"
+   ],
+   "interests": "Computational complexity, algebra and computation, error-correcting codes. Now at TIFR Mumbai.",
+   "areas": [
+    "cplx",
+    "code"
+   ],
+   "email": "",
+   "ext": "",
+   "office": "",
+   "homepage": "https://mrinalkr.bitbucket.io/",
+   "links": [],
+   "bio": [],
+   "papers": []
+  }
+ ],
+ "talks": [
+  {
+   "date": "2024-02-13",
+   "title": "Walker–Breaker Hamiltonicity game on a random board",
+   "speaker": "Pranshu Gupta",
+   "venue": "Online",
+   "abstract": "Positional games on random graphs: the edge probability already known to suffice for the (2:2) connectivity game turns out to be enough for Walker, who must claim edges along a walk, to build a Hamilton cycle."
+  },
+  {
+   "date": "2024-01-24",
+   "title": "Parallel repetition of k-player projection games",
+   "speaker": "Amey Bhangale",
+   "venue": "CC 109",
+   "abstract": "For multi-prover projection games whose value is below one, the value of the n-fold parallel repetition drops exponentially in n. Joint work with Braverman, Khot, Liu and Minzer."
+  },
+  {
+   "date": "2024-01-10",
+   "title": "Fast numerical multivariate multipoint evaluation",
+   "speaker": "Prahladh Harsha",
+   "venue": "CC 109",
+   "abstract": "Extends recent nearly-linear-time multipoint evaluation results from finite fields to infinite fields such as the rationals and reals, in both approximate and exact settings."
+  },
+  {
+   "date": "2024-01-10",
+   "title": "List decoding of Tanner and expander amplified codes from distance certificates",
+   "speaker": "Shashank Srivastava",
+   "venue": "CC 109",
+   "abstract": "Sum-of-squares relaxations give the first list-decoding algorithm for Sipser–Spielman Tanner codes, which lack the algebraic structure most list decoders rely on."
+  },
+  {
+   "date": "2024-01-04",
+   "title": "On various notions of negative dependence",
+   "speaker": "Aravind Srinivasan",
+   "venue": "CC 109",
+   "abstract": "A survey of negatively correlated random variables, from the weak forms that already give Chernoff-type bounds to strongly Rayleigh distributions."
+  },
+  {
+   "date": "2023-12-15",
+   "title": "Linear independence, alternants, and applications",
+   "speaker": "Vishwas Bhargava",
+   "venue": "CC 109",
+   "abstract": "A lemma showing that linear independence of polynomials always has a small witness set of variables, combined with alternant matrices to test independence, with uses in identity testing and learning arithmetic circuits."
+  },
+  {
+   "date": "2023-12-11",
+   "title": "Black-box identity testing of noncommutative rational formulas in deterministic quasipolynomial time",
+   "speaker": "Abhranil Chatterjee",
+   "venue": "CC 109",
+   "abstract": "The first quasipolynomial-size hitting set for all polynomial-size rational formulas, which also places rational identity testing in deterministic quasi-NC."
+  },
+  {
+   "date": "2023-10-23",
+   "title": "Algorithms approaching the threshold for semirandom planted clique",
+   "speaker": "Pravesh Kothari",
+   "venue": "CC 109",
+   "abstract": "Polynomial-time recovery of planted cliques of size close to √n in the Feige–Kilian semirandom model, using certificates for biclique numbers proved in the sum-of-squares system."
+  },
+  {
+   "date": "2023-08-08",
+   "title": "Hardness of approximation for metric clustering",
+   "speaker": "Karthik C. S.",
+   "venue": "CC 109",
+   "abstract": "A framework for proving inapproximability of clustering in Lp metrics, improving bounds that had stood for two decades."
+  },
+  {
+   "date": "2023-03-15",
+   "title": "Errors and correction in cumulative knowledge",
+   "speaker": "Madhu Sudan",
+   "venue": "CC 109",
+   "abstract": "A preferential-attachment model of how knowledge accumulates with occasional errors and checks. Frequent, deep checks root out errors; shallow or rare ones let them persist."
+  }
+ ],
+ "phd": [
+  {
+   "name": "Anand Babu",
+   "url": "https://www.cse.iitb.ac.in/~anandb/"
+  },
+  {
+   "name": "Apoorv Garg",
+   "url": "https://www.cse.iitb.ac.in/~apoorv/"
+  },
+  {
+   "name": "Monu Y",
+   "url": "https://www.cse.iitb.ac.in/~monu/"
+  },
+  {
+   "name": "Rajeevalochana M R",
+   "url": ""
+  },
+  {
+   "name": "Kaartik Bhushan",
+   "url": "https://homepages.iitb.ac.in/~kbhushan/"
+  },
+  {
+   "name": "Prasad Chaugule",
+   "url": "https://sites.google.com/view/prasadvchaugule/home"
+  },
+  {
+   "name": "Chandra Kanta Mohapatra",
+   "url": "https://sites.google.com/view/ckmohapatra"
+  },
+  {
+   "name": "Vaibhav Krishan",
+   "url": ""
+  },
+  {
+   "name": "Roshan Raj",
+   "url": "https://homepages.iitb.ac.in/~194054001/"
+  },
+  {
+   "name": "Sarfaraz Equbal",
+   "url": ""
+  }
+ ],
+ "postdocs": [
+  {
+   "name": "Abhranil Chatterjee",
+   "url": "https://dblp.org/pid/139/0807-1.html",
+   "period": "Oct 2021 – Oct 2022"
+  },
+  {
+   "name": "Sumanta Ghosh",
+   "url": "https://sites.google.com/view/sumghosh/home",
+   "period": "Dec 2019 – Sep 2021"
+  },
+  {
+   "name": "Suryajith Chillara",
+   "url": "http://www.cmi.ac.in/~suryajith/",
+   "period": "Oct 2017 – Oct 2019"
+  },
+  {
+   "name": "Christian Engels",
+   "url": "",
+   "period": "Sep 2017 – Oct 2019"
+  },
+  {
+   "name": "Deepesh Data",
+   "url": "http://www.tcs.tifr.res.in/~deepeshd/",
+   "period": "Oct 2017 – Mar 2018"
+  },
+  {
+   "name": "Bodhayan Roy",
+   "url": "https://www.cse.iitb.ac.in/~broy/",
+   "period": "Dec 2015 – Mar 2017"
+  },
+  {
+   "name": "Nikhil Balaji",
+   "url": "https://sites.google.com/site/nikhilrbalaji/",
+   "period": "Oct 2015 – Jan 2017"
+  }
+ ],
+ "phdAlumni": [
+  {
+   "name": "Sumedh Tirodkar",
+   "url": "https://www.cse.iitb.ac.in/~sumedht/",
+   "year": "2017",
+   "now": "Postdoctoral researcher, SUPSI-IDSIA, Switzerland"
+  },
+  {
+   "name": "Ashish Chiplunkar",
+   "url": "https://www.cse.iitd.ac.in/~ashishc/",
+   "year": "2016",
+   "now": "Faculty, IIT Delhi"
+  },
+  {
+   "name": "Jinesh Machchhar",
+   "url": "http://faculty.iitmandi.ac.in/~jinesh/",
+   "year": "2015",
+   "now": "Faculty, IIT Mandi"
+  },
+  {
+   "name": "Soumitra Pal",
+   "url": "https://sites.google.com/site/soumitrakp/",
+   "year": "2013",
+   "now": "Research Fellow, NCBI, National Library of Medicine"
+  },
+  {
+   "name": "Ruta Mehta",
+   "url": "http://rutamehta.cs.illinois.edu/",
+   "year": "2012",
+   "now": "Faculty, University of Illinois Urbana-Champaign"
+  },
+  {
+   "name": "Jugal Garg",
+   "url": "http://jugal.ise.illinois.edu/",
+   "year": "2012",
+   "now": "Faculty, University of Illinois Urbana-Champaign"
+  },
+  {
+   "name": "Ayush Choure",
+   "url": "https://www.cse.iitb.ac.in/~ayush/",
+   "year": "2012",
+   "now": "Applied Scientist, Microsoft"
+  },
+  {
+   "name": "Sreyash Kenkre",
+   "url": "",
+   "year": "2010",
+   "now": "Research Scientist, IBM Research India"
+  },
+  {
+   "name": "Sudeep K S",
+   "url": "http://people.cse.nitc.ac.in/sudeep/",
+   "year": "2007",
+   "now": "Faculty, NIT Calicut"
+  }
+ ],
+ "ug": [
+  {
+   "name": "K.V. Subramanian",
+   "year": "'86",
+   "inst": "CMI",
+   "url": "https://www.cmi.ac.in/~kv/"
+  },
+  {
+   "name": "Madhavan Mukund",
+   "year": "'86",
+   "inst": "CMI",
+   "url": "https://www.cmi.ac.in/~madhavan/"
+  },
+  {
+   "name": "Meena Mahajan",
+   "year": "'86",
+   "inst": "IMSc",
+   "url": "https://www.imsc.res.in/~meena/"
+  },
+  {
+   "name": "Milind Sohoni",
+   "year": "'86",
+   "inst": "IITB",
+   "url": "https://www.cse.iitb.ac.in/~sohoni/"
+  },
+  {
+   "name": "Sachin Patkar",
+   "year": "'86",
+   "inst": "IITB",
+   "url": "https://www.ee.iitb.ac.in/wiki/faculty/patkar"
+  },
+  {
+   "name": "Sundar Vishwanathan",
+   "year": "'85",
+   "inst": "IITB",
+   "url": "https://www.cse.iitb.ac.in/~sundar/"
+  },
+  {
+   "name": "Jaydeep Chipalkatti",
+   "year": "'91",
+   "inst": "U. Manitoba",
+   "url": "https://server.math.umanitoba.ca/~jaydeep/Site/Home.html"
+  },
+  {
+   "name": "Suresh Nayak",
+   "year": "'91",
+   "inst": "ISI Bangalore",
+   "url": "https://www.isical.ac.in/suresh-nayak"
+  },
+  {
+   "name": "Divakar Viswanath",
+   "year": "'92",
+   "inst": "U. Michigan",
+   "url": "https://dept.math.lsa.umich.edu/~divakar/"
+  },
+  {
+   "name": "Upendra Kulkarni",
+   "year": "'92",
+   "inst": "CMI",
+   "url": "https://www.cmi.ac.in/people/fac-profile.php?id=upendra"
+  },
+  {
+   "name": "Ajay Nerurkar",
+   "year": "'93",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Ashwin Rao",
+   "year": "'93",
+   "inst": "Stanford",
+   "url": "https://stanford.edu/~ashlearn/"
+  },
+  {
+   "name": "Pradyut Shah",
+   "year": "'94",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Pranab Sen",
+   "year": "'94",
+   "inst": "TIFR",
+   "url": "https://www.tcs.tifr.res.in/~pgdsen/"
+  },
+  {
+   "name": "Moses Charikar",
+   "year": "'95",
+   "inst": "Stanford",
+   "url": "https://profiles.stanford.edu/moses-charikar"
+  },
+  {
+   "name": "Rina Panigrahy",
+   "year": "'95",
+   "inst": "Google Research",
+   "url": "http://theory.stanford.edu/~rinap/"
+  },
+  {
+   "name": "Sachin Lodha",
+   "year": "'96",
+   "inst": "TCS Research",
+   "url": "https://www.linkedin.com/in/sachin-lodha-8ba2991/"
+  },
+  {
+   "name": "Swapneel Mahajan",
+   "year": "'96",
+   "inst": "IITB",
+   "url": "http://www.math.iitb.ac.in/~swapneel/"
+  },
+  {
+   "name": "Akash Nanavati",
+   "year": "'97",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Amit Chakrabarti",
+   "year": "'97",
+   "inst": "Dartmouth",
+   "url": "https://www.cs.dartmouth.edu/~ac/"
+  },
+  {
+   "name": "Bharat Adsul",
+   "year": "'97",
+   "inst": "IITB",
+   "url": "https://www.cse.iitb.ac.in/~adsul/"
+  },
+  {
+   "name": "Rahul Shah",
+   "year": "'97",
+   "inst": "LSU",
+   "url": "https://www.lsu.edu/eng/cse/people/faculty/shah.r.php"
+  },
+  {
+   "name": "Rajneesh Hegde",
+   "year": "'97",
+   "inst": "Microsoft",
+   "url": ""
+  },
+  {
+   "name": "Kamesh Munagala",
+   "year": "'98",
+   "inst": "Duke",
+   "url": "https://www.kameshmunagala.org/"
+  },
+  {
+   "name": "Mayur Datar",
+   "year": "'98",
+   "inst": "Flipkart",
+   "url": "http://www-cs-students.stanford.edu/~datar/"
+  },
+  {
+   "name": "Navin Goyal",
+   "year": "'98",
+   "inst": "MSR Bangalore",
+   "url": "https://www.microsoft.com/en-us/research/people/navingo/"
+  },
+  {
+   "name": "Rahul Sami",
+   "year": "'98",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Sanjit Seshia",
+   "year": "'98",
+   "inst": "UC Berkeley",
+   "url": "http://people.eecs.berkeley.edu/~sseshia/"
+  },
+  {
+   "name": "Devavrat Shah",
+   "year": "'99",
+   "inst": "MIT",
+   "url": "https://devavrat.mit.edu/"
+  },
+  {
+   "name": "Nikhil Bansal",
+   "year": "'99",
+   "inst": "U. Michigan",
+   "url": "https://bansal.engin.umich.edu/"
+  },
+  {
+   "name": "Nisheeth Vishnoi",
+   "year": "'99",
+   "inst": "Yale",
+   "url": "https://www.cs.yale.edu/homes/vishnoi/Home.html"
+  },
+  {
+   "name": "Subhash Khot",
+   "year": "'99",
+   "inst": "NYU",
+   "url": "https://cs.nyu.edu/~khot/"
+  },
+  {
+   "name": "Aranyak Mehta",
+   "year": "'00",
+   "inst": "Google",
+   "url": "https://www.linkedin.com/in/aranyak-mehta-13098b4a/"
+  },
+  {
+   "name": "Manoj Prabhakaran",
+   "year": "'00",
+   "inst": "IITB",
+   "url": "https://www.cse.iitb.ac.in/~mp/"
+  },
+  {
+   "name": "Parikshit Gopalan",
+   "year": "'00",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Jugal Garg",
+   "year": "'01",
+   "inst": "UIUC",
+   "url": "https://jugal.ise.illinois.edu/"
+  },
+  {
+   "name": "Nikhil Devanur",
+   "year": "'01",
+   "inst": "Amazon",
+   "url": "https://www.nikhildevanur.com/"
+  },
+  {
+   "name": "Apurva Mudgal",
+   "year": "'02",
+   "inst": "IIT Ropar",
+   "url": "https://www.iitrpr.ac.in/cse/apurva"
+  },
+  {
+   "name": "Ashok Kumar Ponnuswami",
+   "year": "'02",
+   "inst": "Microsoft",
+   "url": ""
+  },
+  {
+   "name": "Dilys Thomas",
+   "year": "'02",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Satyen Kale",
+   "year": "'02",
+   "inst": "Google Research",
+   "url": "https://www.satyenkale.com/"
+  },
+  {
+   "name": "Deeparnab Chakrabarty",
+   "year": "'03",
+   "inst": "Dartmouth",
+   "url": "https://web.cs.dartmouth.edu/people/deeparnab-chakrabarty"
+  },
+  {
+   "name": "Viswanath Nagarajan",
+   "year": "'03",
+   "inst": "U. Michigan",
+   "url": "https://viswa.engin.umich.edu/"
+  },
+  {
+   "name": "Anish Das Sarma",
+   "year": "'04",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Rajat Mittal",
+   "year": "'04",
+   "inst": "IIT Kanpur",
+   "url": "https://www.cse.iitk.ac.in/users/rmittal/"
+  },
+  {
+   "name": "Atish Das Sarma",
+   "year": "'05",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Chinmay Karande",
+   "year": "'06",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Varun Kanade",
+   "year": "'06",
+   "inst": "Oxford",
+   "url": "https://www.cs.ox.ac.uk/people/varun.kanade/"
+  },
+  {
+   "name": "Aditya Bhaskara",
+   "year": "'07",
+   "inst": "Utah",
+   "url": "https://www.cs.utah.edu/~bhaskara/"
+  },
+  {
+   "name": "Rakesh Venkat",
+   "year": "'08",
+   "inst": "IIT Hyderabad",
+   "url": "https://people.iith.ac.in/rakeshvenkat/"
+  },
+  {
+   "name": "Sushant Sachdeva",
+   "year": "'08",
+   "inst": "Toronto",
+   "url": "https://sachdevasushant.github.io/"
+  },
+  {
+   "name": "B. Srivathsan",
+   "year": "'09",
+   "inst": "CMI",
+   "url": "https://www.cmi.ac.in/~sri/"
+  },
+  {
+   "name": "Nisarg Shah",
+   "year": "'11",
+   "inst": "Toronto",
+   "url": "https://www.cs.toronto.edu/~nisarg/"
+  },
+  {
+   "name": "Kuldeep Meel",
+   "year": "'12",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Pritish Kamath",
+   "year": "'12",
+   "inst": "Google Research",
+   "url": "https://pritishkamath.github.io/"
+  },
+  {
+   "name": "Vivek Madan",
+   "year": "'12",
+   "inst": "Amazon",
+   "url": ""
+  },
+  {
+   "name": "Sivakanth Gopi",
+   "year": "'13",
+   "inst": "MSR",
+   "url": "https://www.microsoft.com/en-us/research/people/sigopi/"
+  },
+  {
+   "name": "Tarun Kathuria",
+   "year": "'15",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Manik Dhar",
+   "year": "'16",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Aditi Laddha",
+   "year": "'17",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Nikhil Vyas",
+   "year": "'17",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Sai Sandeep",
+   "year": "'17",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Kunal Mittal",
+   "year": "'19",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Shourya Pandey",
+   "year": "'20",
+   "inst": "",
+   "url": ""
+  },
+  {
+   "name": "Vijaykrishna Gurunathan",
+   "year": "'21",
+   "inst": "",
+   "url": ""
+  }
+ ],
+ "footerLinks": [
+  {
+   "label": "CSE Department",
+   "url": "https://www.cse.iitb.ac.in/"
+  },
+  {
+   "label": "Department faculty directory",
+   "url": "https://www.cse.iitb.ac.in/people/faculty"
+  },
+  {
+   "label": "Previous group page",
+   "url": "https://www.cse.iitb.ac.in/~theory/"
+  },
+  {
+   "label": "IITB Trust Lab",
+   "url": "https://trustlab.iitb.ac.in/"
+  }
+ ]
+}
+</script>
+<script>
+(function(){
+// Snapshot of the untouched page, used to build the downloadable index.html in admin mode.
+const PRISTINE="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
+const PUBLISHED=JSON.parse(document.getElementById("site-data").textContent);
+const clone=o=>JSON.parse(JSON.stringify(o));
+let DATA=PUBLISHED;
+let admin=false;
+
+const GROUPS=[
+  ["core","Core faculty"],["logic","Logic & verification"],["related","Related faculty"],["visiting","Visiting"],["former","Former faculty"]
+];
+const groupName=g=>(GROUPS.find(x=>x[0]===g)||[,g])[1];
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const initials=n=>n.replace(/\./g,"").split(/\s+/).filter(Boolean).map(w=>w[0]).filter(c=>/[A-Z]/.test(c)).slice(0,2).join("");
+const COLORS=["#1A73E8","#188038","#E37400","#D93025","#9334E6","#007B83","#B06000","#1967D2","#C5221F","#12863A"];
+const colorFor=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return COLORS[h%COLORS.length];};
+const slug=s=>s.toLowerCase().normalize("NFKD").replace(/[^\w\s-]/g,"").trim().replace(/[\s_-]+/g,"-")||"item";
+const uniq=(base,taken)=>{let k=base,i=2;while(taken.has(k))k=base+"-"+i++;return k;};
+const todayISO=()=>{const d=new Date();return new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);};
+const fmtDate=iso=>{const d=new Date(iso+"T00:00:00");return isNaN(d)?iso:d.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});};
+let byId={}, areaName={};
+function photo(p,size,extra=""){
+  const src=(p.photos||[]).filter(Boolean);
+  const img=src.length?`<img src="${esc(src[0])}" data-alt="${esc(src.slice(1).join("|"))}" alt="Photo of ${esc(p.name)}" width="${size}" height="${size}" loading="lazy" decoding="async" referrerpolicy="no-referrer">`:"";
+  return `<span class="ph ${extra}" style="width:${size}px;height:${size}px"><span class="ini" style="background:${colorFor(p.name||"?")};font-size:${Math.round(size*.38)}px" aria-hidden="true">${initials(p.name||"")}</span>${img}</span>`;
+}
+// fade each photo in once it has loaded; on failure try the next source, then fall back to initials
+document.addEventListener("load",e=>{
+  const im=e.target; if(im instanceof HTMLImageElement && im.parentElement && im.parentElement.classList.contains("ph")) im.classList.add("ok");
+},true);
+document.addEventListener("error",e=>{
+  const im=e.target; if(!(im instanceof HTMLImageElement) || im.dataset.alt===undefined) return;
+  const rest=im.dataset.alt?im.dataset.alt.split("|"):[];
+  if(rest.length){im.dataset.alt=rest.slice(1).join("|");im.src=rest[0];} else im.remove();
+},true);
+const ICON_OPEN='<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>';
+const svg=d=>`<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="${d}"/></svg>`;
+const I={
+  up:svg("M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z"),
+  down:svg("M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"),
+  edit:svg("M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"),
+  del:svg("M6 19c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"),
+  add:svg("M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"),
+  close:svg("M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"),
+  back:svg("M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"),
+  search:svg("M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z")
+};
+const DIRECTORY="https://www.cse.iitb.ac.in/people/faculty";
+const website=p=>{
+  if(p.homepage) return {url:p.homepage,label:"Website"};
+  if(p.group!=="visiting" && p.group!=="former") return {url:DIRECTORY,label:"Department page"};
+  return null;
+};
+
+/* ---------- theme ---------- */
+const root=document.documentElement;
+try{const t=localStorage.getItem("theory-theme"); if(t) root.dataset.theme=t;}catch(e){}
+$("#themeBtn").addEventListener("click",()=>{
+  const dark=root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme=dark?"light":"dark";
+  try{localStorage.setItem("theory-theme",root.dataset.theme);}catch(e){}
+});
+
+/* ---------- render the whole page from DATA ---------- */
+let state={group:"all",q:"",area:null};
+function render(){
+  const S=DATA.site||{};
+  document.querySelectorAll("[data-text]").forEach(el=>el.textContent=S[el.dataset.text]||"");
+  document.querySelectorAll("[data-html]").forEach(el=>el.innerHTML=S[el.dataset.html]||"");
+  byId=Object.fromEntries(DATA.people.map(p=>[p.id,p]));
+  areaName=Object.fromEntries(DATA.areas.map(a=>[a.key,a.name]));
+  if(state.area && !areaName[state.area]) state.area=null;
+
+  $("#faces").innerHTML=DATA.people.filter(p=>p.group==="core").map(p=>`<li><button class="face" data-open="${esc(p.id)}">${photo(p,76)}<span class="n">${esc(p.name)}</span></button></li>`).join("");
+  // the hero photos are above the fold, so don't wait for lazy loading
+  document.querySelectorAll("#faces img").forEach(im=>im.loading="eager");
+
+  renderPeople();
+  renderTalks();
+  const lk=(n,u)=>u?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>`:esc(n);
+  $("#phd").innerHTML=DATA.phd.map(x=>`<li>${lk(x.name,x.url)}</li>`).join("");
+  $("#postdocs").innerHTML=DATA.postdocs.map(x=>`<li>${lk(x.name,x.url)}<span class="meta">${esc(x.period)}</span></li>`).join("");
+  $("#phdAlumni").innerHTML=DATA.phdAlumni.map(x=>`<li>${lk(x.name,x.url)}<span class="meta">Ph.D. ${esc(x.year)}${x.now?". "+esc(x.now):""}</span></li>`).join("");
+  renderUG($("#ugSearch").value.trim());
+  $("#footerLinks").innerHTML=DATA.footerLinks.map(l=>`<a href="${esc(l.url)}">${esc(l.label)}</a>`).join("");
+}
+
+/* ---------- people ---------- */
+const tabs=$("#tabs");
+tabs.innerHTML=[["all","All"],...GROUPS.map(([k,v])=>[k,v.replace(" faculty","")])].map(([k,v])=>`<button class="fchip" data-group="${k}" aria-pressed="${k==="all"}">${esc(v)}</button>`).join("");
+tabs.addEventListener("click",e=>{
+  const b=e.target.closest(".fchip"); if(!b) return;
+  state.group=b.dataset.group;
+  tabs.querySelectorAll(".fchip").forEach(t=>t.setAttribute("aria-pressed",t===b));
+  renderPeople();
+});
+$("#search").addEventListener("input",e=>{state.q=e.target.value.trim().toLowerCase();renderPeople();});
+function setArea(k){
+  state.area=k; state.group="all";
+  tabs.querySelectorAll(".fchip").forEach(t=>t.setAttribute("aria-pressed",t.dataset.group==="all"));
+  renderPeople(); document.getElementById("people").scrollIntoView();
+}
+function card(p){
+  const w=website(p);
+  return `<li class="card">
+    <button class="card-main" data-open="${esc(p.id)}">${photo(p,72)}
+      <span><span class="name">${esc(p.name)}</span>${p.note?`<span class="badge">${esc(p.note)}</span>`:""}
+      ${p.title?`<span class="role" style="display:block">${esc(p.title)}</span>`:""}
+      <span class="int" style="display:block">${esc(p.interests)}</span></span>
+    </button>
+    <div class="card-actions">
+      <button class="tbtn" data-open="${esc(p.id)}">View profile</button>
+      ${w?`<a class="tbtn" href="${esc(w.url)}" target="_blank" rel="noopener">${ICON_OPEN}${esc(w.label)}</a>`:""}
+      ${""/*admin*/+(admin?`<button class="tbtn" data-edit-person="${esc(p.id)}">${I.edit}Edit</button>`:"")/*/admin*/}
+    </div></li>`;
+}
+function renderPeople(){
+  const q=state.q;
+  const match=p=>{
+    if(state.group!=="all"&&p.group!==state.group) return false;
+    if(state.area&&!(p.areas||[]).includes(state.area)) return false;
+    if(!q) return true;
+    return [p.name,p.interests,(p.bio||[]).join(" "),(p.papers||[]).join(" "),(p.areas||[]).map(a=>areaName[a]||"").join(" ")].join(" ").toLowerCase().includes(q);
+  };
+  $("#areafilter").innerHTML=state.area?`Showing people in ${esc(areaName[state.area])}. <button class="tbtn" id="clearArea">Clear filter</button>`:"";
+  const ca=$("#clearArea"); if(ca) ca.onclick=()=>{state.area=null;renderPeople();};
+  let html="";
+  GROUPS.forEach(([g,label])=>{
+    const list=DATA.people.filter(p=>p.group===g&&match(p));
+    if(list.length) html+=`<h3 class="group-title">${esc(label)}</h3><ul class="people">${list.map(card).join("")}</ul>`;
+  });
+  $("#peopleOut").innerHTML=html||`<div class="empty">No one matches “${esc(state.q)}”. Try a broader topic such as “codes” or “graphs”, or clear the filters.</div>`;
+}
+
+/* ---------- profile sheet ---------- */
+const sheet=$("#sheet");
+function openProfile(id){
+  const p=byId[id]; if(!p) return;
+  const contact=[];
+  if(p.email) contact.push(["Email",`<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>`]);
+  if(p.ext) contact.push(["Phone",`<a href="tel:+91222576${esc(p.ext)}">+91 22 2576 ${esc(p.ext)}</a>`]);
+  if(p.office) contact.push(["Office",esc(p.office)]);
+  const w=website(p);
+  const bio=(p.bio||[]).filter(Boolean), papers=(p.papers||[]).filter(Boolean);
+  $("#sheetBody").innerHTML=`
+    <div class="sheet-bar"><button class="icon-btn" id="closeSheet" aria-label="Close profile">${I.close}</button></div>
+    <div class="who-head">${photo(p,112,"lg")}<div><h2 id="sheetName">${esc(p.name)}</h2>
+      <div class="role">${esc(p.title?p.title+", ":"")}${esc(groupName(p.group))}${p.note?`<span class="badge">${esc(p.note)}</span>`:""}</div></div></div>
+    <div class="linkrow">
+      ${w?`<a class="btn filled" href="${esc(w.url)}" target="_blank" rel="noopener">${ICON_OPEN}Visit ${w.label==="Website"?"website":"department page"}</a>`:""}
+      ${(p.links||[]).map(l=>`<a class="btn outlined" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join("")}
+      ${""/*admin*/+(admin?`<button class="btn outlined" data-edit-person="${esc(p.id)}">${I.edit}Edit profile</button>`:"")/*/admin*/}
+    </div>
+    <div class="tags">${(p.areas||[]).filter(a=>areaName[a]).map(a=>`<button class="fchip" data-area="${esc(a)}">${esc(areaName[a])}</button>`).join("")}</div>
+    <h3>Research</h3><p>${esc(p.interests)}</p>
+    ${bio.length?`<h3>Background</h3><ul>${bio.map(b=>`<li>${esc(b)}</li>`).join("")}</ul>`:""}
+    ${papers.length?`<h3>Selected publications</h3><ul>${papers.map(b=>`<li>${esc(b)}</li>`).join("")}</ul>`:""}
+    ${contact.length?`<h3>Contact</h3><div class="contact"><dl>${contact.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl></div>`:""}`;
+  sheet.querySelectorAll(".who-head img").forEach(im=>im.loading="eager");
+  $("#closeSheet").onclick=()=>sheet.close();
+  if(!sheet.open) sheet.showModal();
+  sheet.querySelector(".sheet-inner").scrollTop=0;
+}
+sheet.addEventListener("click",e=>{
+  if(e.target===sheet){sheet.close();return;}
+  /*admin*/const ed=e.target.closest("[data-edit-person]"); if(ed){sheet.close();editPerson(ed.dataset.editPerson);return;}/*/admin*/
+  const a=e.target.closest("[data-area]"); if(a){sheet.close();setArea(a.dataset.area);}
+});
+document.addEventListener("click",e=>{
+  if(sheet.contains(e.target)) return;
+  /*admin*/if(adm.contains(e.target)) return;
+  const ed=e.target.closest("[data-edit-person]"); if(ed){editPerson(ed.dataset.editPerson);return;}
+  const t=e.target.closest("[data-edit]"); if(t){openAdmin(t.dataset.edit);return;}/*/admin*/
+  const o=e.target.closest("[data-open]"); if(o){openProfile(o.dataset.open);return;}
+  const a=e.target.closest("[data-area]"); if(a) setArea(a.dataset.area);
+});
+
+/* ---------- seminars ---------- */
+function renderTalks(){
+  const today=todayISO();
+  const list=[...DATA.talks].sort((a,b)=>b.date.localeCompare(a.date));
+  $("#talks").innerHTML=list.map((t,i)=>`
+  <li class="talk"><button aria-expanded="false" aria-controls="ab${i}">
+    <span class="d">${esc(fmtDate(t.date))}<br>${esc(t.venue)}${t.date>=today?`<br><span class="upc">Upcoming</span>`:""}</span>
+    <span class="t">${esc(t.title)}<span class="s">${esc(t.speaker)}</span></span>
+    <svg class="icon chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+  </button><div class="ab" id="ab${i}" hidden>${esc(t.abstract)}</div></li>`).join("")||`<li class="empty" style="border:0">No talks listed yet.</li>`;
+}
+$("#talks").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  const open=b.getAttribute("aria-expanded")==="true";
+  b.setAttribute("aria-expanded",!open);
+  document.getElementById(b.getAttribute("aria-controls")).hidden=open;
+});
+
+/* ---------- undergraduate alumni ---------- */
+function renderUG(q=""){
+  q=q.toLowerCase();
+  const list=DATA.ug.filter(x=>(x.name+" "+x.inst).toLowerCase().includes(q));
+  $("#ug").innerHTML=list.length?list.map(x=>{
+    const inner=`${esc(x.name)} ${esc(x.year)}${x.inst?` <em>${esc(x.inst)}</em>`:""}`;
+    return x.url?`<a href="${esc(x.url)}" target="_blank" rel="noopener">${inner}</a>`:`<span>${inner}</span>`;
+  }).join(""):`<span>No alumni match “${esc(q)}”.</span>`;
+}
+$("#ugSearch").addEventListener("input",e=>renderUG(e.target.value.trim()));
+
+/* ---------- nav highlight ---------- */
+const navLinks=[...document.querySelectorAll("nav.links a")];
+const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting)navLinks.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+en.target.id));});},{rootMargin:"-45% 0px -50% 0px"});
+["people","seminars","students","alumni","contact"].forEach(id=>{const el=document.getElementById(id);if(el)io.observe(el);});
+
+/*admin*/
+/* =====================================================================
+   Editor: editor.html always opens in edit mode. Everything between the admin markers
+   is removed from the downloaded index.html, so the public page has no editor.
+   Edits are saved as a draft in this browser's storage and shown live.
+   ===================================================================== */
+const DRAFT_KEY="theory-admin-draft";
+const adm=$("#adm"), admBody=$("#admBody");
+let ed={tab:"people",mode:"list",index:-1,item:null,q:"",after:null};
+let photoState=[];
+
+const F=(k,label,type="text",o={})=>({k,label,type,...o});
+const SITE_FIELDS=[
+  F("heroTitle","Main heading","text",{req:1}),
+  F("heroSub","Introduction","textarea",{rows:3}),
+  F("peopleIntro","People section intro","textarea",{rows:2}),
+  F("seminarIntro","Seminar section intro","textarea",{rows:2}),
+  F("seminarNote","Note below the talks","html",{rows:3}),
+  F("alumniIntro","Alumni section intro","textarea",{rows:2}),
+  F("alumniNote","Note below undergraduate alumni","html",{rows:2}),
+  F("footerAddress","Footer address","html",{rows:3}),
+  F("footerNote","Footer note","textarea",{rows:2})
+];
+const COLS={
+  people:{label:"People",one:"person",
+    title:p=>p.name, meta:p=>[groupName(p.group),p.title,p.note].filter(Boolean).join(" · "),
+    blank:()=>({id:"",name:"",group:"core",title:"",note:"",photos:[],interests:"",areas:[],email:"",ext:"",office:"",homepage:"",links:[],bio:[],papers:[]}),
+    fields:[
+      F("name","Full name","text",{req:1}),
+      [F("group","Group","select",{options:()=>GROUPS}),F("title","Title","text",{hint:"For example, Assistant Professor"})],
+      F("photos","Photo","photo"),
+      F("interests","Research interests","textarea",{req:1,rows:3,hint:"Shown on the card and at the top of the profile."}),
+      F("areas","Areas","checks",{options:()=>DATA.areas.map(a=>[a.key,a.name]),hint:"Shown as tags on the profile. Manage the list under Research areas."}),
+      [F("email","Email","email"),F("homepage","Website","url")],
+      [F("office","Office","text",{hint:"For example, CC 317, Computing Complex"}),F("ext","Phone extension","text",{hint:"Last four digits after +91 22 2576"})],
+      F("note","Badge","text",{hint:"Short label beside the name, such as On leave or Adjunct. Leave empty for none."}),
+      F("links","Other links","links",{rows:3,hint:"One per line as Label | URL, for example DBLP | https://dblp.org/…"}),
+      F("bio","Background","lines",{rows:4,hint:"One point per line."}),
+      F("papers","Selected publications","lines",{rows:5,hint:"One publication per line."})
+    ]},
+  talks:{label:"Seminars",one:"talk",sorted:true,
+    title:t=>t.title, meta:t=>fmtDate(t.date)+" · "+t.speaker,
+    blank:()=>({date:todayISO(),title:"",speaker:"",venue:"CC 109",abstract:""}),
+    fields:[F("title","Title","text",{req:1}),[F("speaker","Speaker","text",{req:1}),F("date","Date","date",{req:1})],F("venue","Venue","text",{hint:"For example, CC 109 or Online"}),F("abstract","Summary","textarea",{rows:5})]},
+  phd:{label:"Ph.D. students",one:"student",
+    title:x=>x.name, meta:x=>x.url||"No link",
+    blank:()=>({name:"",url:""}),
+    fields:[F("name","Name","text",{req:1}),F("url","Homepage","url")]},
+  postdocs:{label:"Postdocs",one:"postdoc",
+    title:x=>x.name, meta:x=>x.period,
+    blank:()=>({name:"",url:"",period:""}),
+    fields:[F("name","Name","text",{req:1}),F("url","Homepage","url"),F("period","Period","text",{hint:"For example, Oct 2021 – Oct 2022"})]},
+  phdAlumni:{label:"Ph.D. alumni",one:"graduate",addFirst:true,
+    title:x=>x.name, meta:x=>["Ph.D. "+x.year,x.now].filter(Boolean).join(" · "),
+    blank:()=>({name:"",url:"",year:String(new Date().getFullYear()),now:""}),
+    fields:[F("name","Name","text",{req:1}),[F("year","Graduation year","text",{req:1}),F("url","Homepage","url")],F("now","Current position","text",{hint:"For example, Faculty, IIT Delhi"})]},
+  ug:{label:"UG alumni",one:"alumnus",
+    title:x=>x.name+" "+x.year, meta:x=>x.inst||"No institution listed",
+    blank:()=>({name:"",year:"'"+String(new Date().getFullYear()).slice(2),inst:"",url:""}),
+    fields:[F("name","Name","text",{req:1}),[F("year","Batch","text",{hint:"For example, '99"}),F("inst","Institution","text")],F("url","Homepage","url")]},
+  areas:{label:"Research areas",one:"area",
+    intro:"Areas appear as tags on profiles. Selecting a tag filters the People list.",
+    title:a=>a.name, meta:a=>{const n=DATA.people.filter(p=>(p.areas||[]).includes(a.key)).length;return n+(n===1?" person":" people");},
+    blank:()=>({key:"",name:""}),
+    fields:[F("name","Name","text",{req:1})]},
+  footerLinks:{label:"Footer links",one:"link",
+    title:l=>l.label, meta:l=>l.url,
+    blank:()=>({label:"",url:""}),
+    fields:[F("label","Label","text",{req:1}),F("url","URL","url",{req:1})]}
+};
+const TABS=[["site","Page text"],...Object.entries(COLS).map(([k,c])=>[k,c.label]),["publish","Publish"]];
+
+const LAST_KEY="theory-admin-last-download";
+// "published" = the last version downloaded from this editor (or the editor's built-in data)
+const lastPublished=()=>{try{const s=localStorage.getItem(LAST_KEY);if(s)return JSON.parse(s);}catch(e){}return PUBLISHED;};
+const isDirty=()=>JSON.stringify(DATA)!==JSON.stringify(lastPublished());
+function loadDraft(){try{const s=localStorage.getItem(DRAFT_KEY);return s?JSON.parse(s):null;}catch(e){return null;}}
+function commit(msg){
+  try{localStorage.setItem(DRAFT_KEY,JSON.stringify(DATA));}
+  catch(e){alert("Could not save the draft in this browser (storage may be full or blocked). Download the page from Publish to keep your changes.");}
+  render(); updateBar(msg);
+}
+let flashT;
+function updateBar(msg){
+  const d=isDirty();
+  $("#abDot").classList.toggle("on",d);
+  $("#abText").textContent=msg||(d?"Unpublished changes":"No changes");
+  clearTimeout(flashT);
+  if(msg) flashT=setTimeout(()=>updateBar(),2200);
+}
+function setAdmin(on){
+  admin=on;
+  document.body.classList.toggle("admin",on);
+  $("#adminbar").hidden=!on;
+  DATA=on?(loadDraft()||clone(lastPublished())):lastPublished();
+  if(!on && adm.open) adm.close();
+  render(); if(on) updateBar();
+}
+$("#admClose").addEventListener("click",()=>adm.close());
+adm.addEventListener("click",e=>{if(e.target===adm) adm.close();});
+function openAdmin(tab,opts={}){
+  if(!admin) return;
+  ed={tab,mode:"list",index:-1,item:null,q:"",after:null,...opts};
+  drawAdmin();
+  if(!adm.open) adm.showModal();
+  $("#admInner").scrollTop=0;
+}
+function editPerson(id){
+  const i=DATA.people.findIndex(p=>p.id===id); if(i<0) return;
+  openAdmin("people",{mode:"form",index:i,item:clone(DATA.people[i])});
+}
+
+function drawAdmin(){
+  $("#admTabs").innerHTML=TABS.map(([k,v])=>`<button class="fchip" data-tab="${k}" aria-pressed="${k===ed.tab}">${esc(v)}</button>`).join("");
+  if(ed.tab==="site") admBody.innerHTML=siteForm();
+  else if(ed.tab==="publish") admBody.innerHTML=publishView();
+  else admBody.innerHTML=ed.mode==="form"?itemForm():listView();
+  if(ed.mode==="form"&&ed.tab==="people"){
+    if(!ed.phInit){photoState=[...(ed.item.photos||[])];ed.phInit=true;}
+    drawPhoto();
+  }
+}
+$("#admTabs").addEventListener("click",e=>{
+  const b=e.target.closest("[data-tab]"); if(!b) return;
+  ed={tab:b.dataset.tab,mode:"list",index:-1,item:null,q:"",after:null}; drawAdmin();
+});
+
+/* list of items */
+function listView(){
+  const c=COLS[ed.tab], items=DATA[ed.tab];
+  let idx=items.map((_,i)=>i);
+  if(c.sorted) idx.sort((a,b)=>items[b].date.localeCompare(items[a].date));
+  const q=ed.q.toLowerCase();
+  const shown=q?idx.filter(i=>(c.title(items[i])+" "+c.meta(items[i])).toLowerCase().includes(q)):idx;
+  const canMove=!c.sorted&&!q;
+  const row=i=>{
+    const x=items[i];
+    return `<li class="arow">
+      ${ed.tab==="people"?photo(x,36):""}
+      <div class="ainfo" data-act="edit" data-i="${i}"><div class="at">${esc(c.title(x))}</div><div class="am">${esc(c.meta(x))}</div></div>
+      <div class="aact">
+        ${ed.tab==="phd"?`<button class="tbtn" data-act="grad" data-i="${i}" title="Move to Ph.D. alumni">Graduated</button>`:""}
+        ${canMove?`<button class="icon-btn" data-act="up" data-i="${i}" aria-label="Move up" title="Move up"${i===0?" disabled":""}>${I.up}</button>
+        <button class="icon-btn" data-act="down" data-i="${i}" aria-label="Move down" title="Move down"${i===items.length-1?" disabled":""}>${I.down}</button>`:""}
+        <button class="icon-btn" data-act="edit" data-i="${i}" aria-label="Edit" title="Edit">${I.edit}</button>
+        <button class="icon-btn" data-act="del" data-i="${i}" aria-label="Delete" title="Delete">${I.del}</button>
+      </div></li>`;
+  };
+  return `<div class="adm-top"><h3>${esc(c.label)}<span class="count">${items.length}</span></h3>
+      <button class="btn filled sm" data-act="add">${I.add}Add ${esc(c.one)}</button></div>
+    ${c.intro?`<p class="muted">${esc(c.intro)}</p>`:""}
+    ${c.sorted?`<p class="muted">Talks are shown newest first. Talks dated today or later are marked Upcoming.</p>`:""}
+    ${items.length>8?`<label class="searchbox sm">${I.search}<input id="admQ" type="search" placeholder="Filter ${esc(c.label.toLowerCase())}" value="${esc(ed.q)}" aria-label="Filter list"></label>`:""}
+    ${shown.length?`<ul class="alist">${shown.map(row).join("")}</ul>`:`<div class="empty">${q?"Nothing matches this filter.":"Nothing here yet."}</div>`}`;
+}
+admBody.addEventListener("input",e=>{
+  if(e.target.id==="admQ"){
+    ed.q=e.target.value; const pos=e.target.selectionStart;
+    drawAdmin(); const n=$("#admQ"); n.focus(); n.setSelectionRange(pos,pos);
+  }
+  if(e.target.name==="name"&&ed.tab==="people") drawPhotoPreview();
+  const r=e.target.closest("[data-ph]"); if(r) {photoState[+r.dataset.ph]=r.value.trim(); clearTimeout(phT); phT=setTimeout(drawPhotoPreview,400);}
+});
+
+/* forms */
+function fields(list,item){
+  return list.map(f=>Array.isArray(f)?`<div class="two">${f.map(g=>one(g,item[g.k])).join("")}</div>`:one(f,item[f.k])).join("");
+}
+function one(f,v){
+  const id="f_"+f.k, req=f.req?" required":"";
+  const lab=`<label for="${id}">${esc(f.label)}</label>`;
+  const hint=f.hint?`<div class="hint">${esc(f.hint)}</div>`:(f.type==="html"?`<div class="hint">Simple HTML is allowed, such as &lt;a href="…"&gt;link&lt;/a&gt; and &lt;b&gt;bold&lt;/b&gt;.</div>`:"");
+  let ctl;
+  switch(f.type){
+    case "textarea": case "html":
+      ctl=`<textarea class="inp" id="${id}" name="${f.k}" rows="${f.rows||3}"${req}>${esc(v)}</textarea>`; break;
+    case "lines":
+      ctl=`<textarea class="inp" id="${id}" name="${f.k}" rows="${f.rows||3}"${req}>${esc((v||[]).join("\n"))}</textarea>`; break;
+    case "links":
+      ctl=`<textarea class="inp" id="${id}" name="${f.k}" rows="${f.rows||3}">${esc((v||[]).map(l=>l.label+" | "+l.url).join("\n"))}</textarea>`; break;
+    case "select":
+      ctl=`<select class="inp" id="${id}" name="${f.k}">${f.options().map(([k,l])=>`<option value="${esc(k)}"${k===v?" selected":""}>${esc(l)}</option>`).join("")}</select>`; break;
+    case "checks":
+      return `<div class="fld"><span class="lbl">${esc(f.label)}</span><div class="chips">${f.options().map(([k,l])=>`<label class="fchip ck"><input type="checkbox" name="${f.k}" value="${esc(k)}"${(v||[]).includes(k)?" checked":""}>${esc(l)}</label>`).join("")}</div>${hint}</div>`;
+    case "photo":
+      return `<div class="fld"><label for="f_photo">Photo link</label><div id="photoEd"></div></div>`;
+    default:
+      ctl=`<input class="inp" id="${id}" name="${f.k}" type="${f.type}" value="${esc(v)}"${req}>`;
+  }
+  return `<div class="fld">${lab}${ctl}${hint}</div>`;
+}
+function readFields(form,list,item){
+  list.flat().forEach(f=>{
+    const el=form.elements[f.k];
+    switch(f.type){
+      case "lines": item[f.k]=el.value.split("\n").map(s=>s.trim()).filter(Boolean); break;
+      case "links": item[f.k]=el.value.split("\n").map(s=>s.trim()).filter(Boolean).map(s=>{
+        const i=s.indexOf("|"); return i<0?{label:"Link",url:s}:{label:s.slice(0,i).trim()||"Link",url:s.slice(i+1).trim()};
+      }).filter(l=>l.url); break;
+      case "checks": item[f.k]=[...form.querySelectorAll(`input[name="${f.k}"]:checked`)].map(i=>i.value); break;
+      case "photo": item[f.k]=photoState.map(s=>imgLink(s.trim())).filter(Boolean); break;
+      case "html": case "textarea": item[f.k]=el.value.trim(); break;
+      default: item[f.k]=el.value.trim();
+    }
+  });
+  return item;
+}
+const formBar=(label="Save")=>`<div class="formbar"><button class="btn filled" type="submit">${label}</button><button class="btn outlined" type="button" data-act="cancel">Cancel</button></div>`;
+function siteForm(){
+  return `<form id="admForm" data-kind="site"><h3 class="adm-h" style="margin-bottom:16px">Page text</h3>${fields(SITE_FIELDS,DATA.site)}${formBar("Save text")}</form>`;
+}
+function itemForm(){
+  const c=COLS[ed.tab], isNew=ed.index<0;
+  return `<button class="tbtn back" data-act="cancel">${I.back}${esc(c.label)}</button>
+    <form id="admForm" data-kind="item"><h3 class="adm-h" style="margin-bottom:16px">${isNew?"New "+esc(c.one):"Edit "+esc(c.one)}</h3>
+    ${fields(c.fields,ed.item)}${formBar(isNew?"Add "+c.one:"Save changes")}</form>`;
+}
+admBody.addEventListener("submit",e=>{
+  e.preventDefault();
+  const form=e.target;
+  if(form.dataset.kind==="site"){
+    DATA.site=readFields(form,SITE_FIELDS,{...DATA.site});
+    commit("Saved"); drawAdmin(); return;
+  }
+  const c=COLS[ed.tab], list=DATA[ed.tab];
+  const item=readFields(form,c.fields,ed.item);
+  if(ed.index<0){
+    if(ed.tab==="people") item.id=uniq(slug(item.name),new Set(list.map(p=>p.id)));
+    if(ed.tab==="areas") item.key=uniq(slug(item.name),new Set(list.map(a=>a.key)));
+    c.addFirst?list.unshift(item):list.push(item);
+  } else list[ed.index]=item;
+  if(ed.after) ed.after();
+  const tab=ed.tab, name=c.title(item);
+  ed={tab,mode:"list",index:-1,item:null,q:"",after:null};
+  commit(`Saved “${name.length>28?name.slice(0,27)+"…":name}”`); drawAdmin();
+  $("#admInner").scrollTop=0;
+});
+admBody.addEventListener("click",e=>{
+  const b=e.target.closest("[data-act]"); if(!b) return;
+  const act=b.dataset.act, i=+b.dataset.i, c=COLS[ed.tab], list=DATA[ed.tab];
+  if(act==="cancel"){
+    if(ed.tab==="site"){drawAdmin();return;}
+    ed.mode="list"; ed.item=null; ed.after=null; drawAdmin(); return;
+  }
+  if(act==="add"){ed.phInit=false;ed.mode="form";ed.index=-1;ed.item=c.blank();drawAdmin();$("#admInner").scrollTop=0;return;}
+  if(act==="edit"){ed.phInit=false;ed.mode="form";ed.index=i;ed.item=clone(list[i]);drawAdmin();$("#admInner").scrollTop=0;return;}
+  if(act==="up"||act==="down"){
+    const j=act==="up"?i-1:i+1; if(j<0||j>=list.length) return;
+    [list[i],list[j]]=[list[j],list[i]]; commit("Moved"); drawAdmin(); return;
+  }
+  if(act==="del"){
+    if(!confirm(`Delete “${c.title(list[i])}”? You can still discard all draft changes later from Publish.`)) return;
+    const [gone]=list.splice(i,1);
+    if(ed.tab==="areas") DATA.people.forEach(p=>p.areas=(p.areas||[]).filter(a=>a!==gone.key));
+    commit("Deleted"); drawAdmin(); return;
+  }
+  if(act==="grad"){
+    const s=list[i];
+    ed={tab:"phdAlumni",mode:"form",index:-1,q:"",item:{...COLS.phdAlumni.blank(),name:s.name,url:s.url},
+        after:()=>{const k=DATA.phd.indexOf(s); if(k>=0) DATA.phd.splice(k,1);}};
+    drawAdmin(); $("#admInner").scrollTop=0; return;
+  }
+  // photo editor
+  if(act==="ph-add"){photoState.push("");drawPhoto();const ins=admBody.querySelectorAll("[data-ph]");ins[ins.length-1]?.focus();return;}
+  if(act==="ph-del"){photoState.splice(i,1);if(!photoState.length)photoState=[""];drawPhoto();return;}
+  if(act==="ph-first"){const [x]=photoState.splice(i,1);photoState.unshift(x);drawPhoto();return;}
+  // publish view
+  if(act==="download") downloadPage();
+  if(act==="export") saveFile("theory-group-data.json",JSON.stringify(DATA,null,1),"application/json");
+  if(act==="import") $("#importFile").click();
+  if(act==="discard"){
+    if(!confirm("Discard every change since your last download?")) return;
+    try{localStorage.removeItem(DRAFT_KEY);}catch(e){}
+    DATA=clone(lastPublished()); render(); updateBar("Draft discarded"); drawAdmin();
+  }
+});
+admBody.addEventListener("change",e=>{
+  if(e.target.id==="phFile"&&e.target.files[0]) uploadPhoto(e.target.files[0]);
+  const r=e.target.closest("[data-ph]"); if(r){const v=imgLink(r.value.trim()); if(v!==r.value){r.value=v; photoState[+r.dataset.ph]=v; drawPhotoPreview();}}
+  if(e.target.id==="importFile"&&e.target.files[0]){
+    e.target.files[0].text().then(t=>{
+      const d=t.trimStart().startsWith("<")
+        ?JSON.parse(new DOMParser().parseFromString(t,"text/html").getElementById("site-data").textContent)
+        :JSON.parse(t);
+      if(!d||!Array.isArray(d.people)||!Array.isArray(d.talks)||!d.site) throw new Error("bad");
+      DATA=d; commit("Data imported"); drawAdmin();
+    }).catch(()=>alert("That file is not a Theory Group page or data export."));
+  }
+});
+
+/* photo editor (people form): a link to the photo, optional backup links, or an upload */
+let phT, phCheck=0;
+// turn common share links into direct image links
+function imgLink(u){
+  if(!u||u.startsWith("data:")) return u;
+  const g=u.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:[^#]*&)?id=)([\w-]+)/);
+  if(g) return `https://drive.google.com/thumbnail?id=${g[1]}&sz=w600`;
+  if(/^https?:\/\/(www\.)?dropbox\.com\//.test(u)) return u.replace(/([?&])dl=0/,"$1raw=1");
+  return u;
+}
+function drawPhoto(){
+  const box=$("#photoEd"); if(!box) return;
+  if(!photoState.length) photoState=[""];
+  const main=photoState[0]||"";
+  const del=(i,label)=>`<button type="button" class="icon-btn" data-act="ph-del" data-i="${i}" aria-label="${label}" title="${label}">${I.close}</button>`;
+  box.innerHTML=`<div class="phed"><span id="phPrev"></span>
+    <div class="phrows">
+      <div class="phrow">${main.startsWith("data:")
+        ?`<span class="phup">Uploaded image, stored inside the page file</span>${del(0,"Remove image")}`
+        :`<input class="inp" type="url" id="f_photo" data-ph="0" value="${esc(main)}" placeholder="https://… link to the photo">${main?del(0,"Clear link"):""}`}</div>
+      <div class="hint" id="phStatus" aria-live="polite"></div>
+      ${photoState.slice(1).map((s,k)=>{const i=k+1;return `<div class="phrow">
+        ${s.startsWith("data:")?`<span class="phup">Uploaded image</span>`:`<input class="inp" type="url" data-ph="${i}" value="${esc(s)}" placeholder="Backup link, used if the one above fails" aria-label="Backup photo link ${i}">`}
+        <button type="button" class="icon-btn" data-act="ph-first" data-i="${i}" aria-label="Make this the main photo" title="Make main photo">${I.up}</button>${del(i,"Remove link")}</div>`;}).join("")}
+      <div class="phbtns">
+        <button type="button" class="tbtn" data-act="ph-add">${I.add}Add backup link</button>
+        <label class="tbtn">${I.add}Upload from computer<input type="file" id="phFile" accept="image/*" hidden></label>
+      </div>
+      <div class="hint">Paste a direct link to the photo. On most sites, right-click the photo and choose <b>Copy Image Address</b>. Google Drive and Dropbox share links are converted automatically; the file must be shared with anyone who has the link. Leave it empty to show initials.</div>
+    </div></div>`;
+  drawPhotoPreview();
+}
+function drawPhotoPreview(){
+  const pv=$("#phPrev"); if(!pv) return;
+  const n=$("#f_name");
+  pv.innerHTML=photo({name:(n&&n.value)||"?",photos:photoState.map(imgLink)},80,"lg");
+  pv.querySelectorAll("img").forEach(im=>im.loading="eager");
+  // check that the main link really is an image
+  const st=$("#phStatus"); if(!st) return;
+  const url=imgLink((photoState[0]||"").trim()), my=++phCheck;
+  if(!url||url.startsWith("data:")){st.textContent="";return;}
+  st.textContent="Checking the link…";
+  const im=new Image(); im.referrerPolicy="no-referrer";
+  im.onload=()=>{if(my===phCheck) st.textContent="The photo loads correctly.";};
+  im.onerror=()=>{if(my===phCheck) st.innerHTML=`<span style="color:#D93025">This link didn't load as an image. Use a direct link to the picture itself, not to a web page.</span>`;};
+  im.src=url;
+}
+function uploadPhoto(file){
+  const r=new FileReader();
+  r.onload=()=>{
+    const img=new Image();
+    img.onload=()=>{
+      // centre-crop to a square and shrink so the page stays small
+      const s=Math.min(img.width,img.height), out=320, cv=document.createElement("canvas");
+      cv.width=cv.height=Math.min(out,s);
+      cv.getContext("2d").drawImage(img,(img.width-s)/2,Math.max(0,(img.height-s)*.2),s,s,0,0,cv.width,cv.height);
+      const data=cv.toDataURL("image/jpeg",.85);
+      if(!photoState[0]) photoState[0]=data; else photoState.unshift(data);
+      drawPhoto();
+    };
+    img.onerror=()=>alert("That file could not be read as an image.");
+    img.src=r.result;
+  };
+  r.readAsDataURL(file);
+}
+
+/* publish */
+function publishView(){
+  const d=isDirty();
+  return `<h3 class="adm-h" style="margin-bottom:16px">Publish</h3>
+    <div class="pub"><h3>1. Download the public page</h3>
+      <p class="muted" style="margin:0">${d?"You have changes since your last download.":"Nothing has changed since your last download."} The download is a plain <b>index.html</b> for visitors, with all your changes and no Admin link, editor or password in it.</p>
+      <div class="cta"><button class="btn filled" data-act="download">Download index.html</button></div></div>
+    <div class="pub"><h3>2. Upload it to the web server</h3>
+      <p class="muted" style="margin:0">Replace index.html on the server with the downloaded file. Keep <b>editor.html</b> on your own computer and don't upload it.</p></div>
+    <div class="pub"><h3>Backup and restore</h3>
+      <p class="muted" style="margin:0">Your edits live in this browser. To continue on another computer or browser, import the current index.html from the website, or a data file exported here.</p>
+      <div class="cta"><button class="btn outlined" data-act="import">Import index.html or data</button><button class="btn outlined" data-act="export">Export data</button><input type="file" id="importFile" accept=".html,.htm,.json,text/html,application/json" hidden></div></div>
+    <div class="pub"><h3>Discard changes</h3>
+      <p class="muted" style="margin:0">Throw away every change made since your last download.</p>
+      <div class="cta"><button class="btn outlined" data-act="discard"${d?"":" disabled"}>Discard changes</button></div></div>`;
+}
+function saveFile(name,text,type){
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([text],{type}));
+  a.download=name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+}
+// removes everything between the admin markers (built from pieces so this code doesn't match itself)
+const STRIP=[new RegExp("<!-"+"-admin-"+"->[\\s\\S]*?<!-"+"-/admin-"+"->","g"),new RegExp("/\\*"+"admin\\*/[\\s\\S]*?/\\*/"+"admin\\*/","g")];
+function publicHTML(base){
+  STRIP.forEach(re=>base=base.replace(re,""));
+  const doc=new DOMParser().parseFromString(base,"text/html");
+  const holder=doc.getElementById("site-data");
+  if(!holder||doc.getElementById("adm")) return null;
+  // bake text and lists into the HTML so they are there before scripts run (search engines, no-JS readers)
+  doc.querySelectorAll("[data-text]").forEach(el=>el.textContent=DATA.site[el.dataset.text]||"");
+  doc.querySelectorAll("[data-html]").forEach(el=>el.innerHTML=DATA.site[el.dataset.html]||"");
+  const keep={state,ug:$("#ugSearch").value};
+  admin=false; state={group:"all",q:"",area:null}; $("#ugSearch").value=""; render();
+  ["faces","peopleOut","talks","phd","postdocs","phdAlumni","ug","footerLinks"].forEach(id=>{
+    const el=doc.getElementById(id); if(el) el.innerHTML=document.getElementById(id).innerHTML.replace(/ class="ok"/g,"");
+  });
+  admin=true; state=keep.state; $("#ugSearch").value=keep.ug; render();
+  holder.textContent="\n"+JSON.stringify(DATA,null,1).replace(/</g,"\\u003c")+"\n";
+  return "<!DOCTYPE html>\n"+doc.documentElement.outerHTML+"\n";
+}
+async function downloadPage(){
+  let base=PRISTINE;
+  // prefer the exact editor file from disk or server when it can be fetched
+  try{
+    if(location.protocol.startsWith("http")){
+      const r=await fetch(location.pathname,{cache:"no-store"});
+      if(r.ok){const t=await r.text(); if(t.includes('id="site-data"')) base=t;}
+    }
+  }catch(e){}
+  const html=publicHTML(base);
+  if(!html){alert("Could not build the page file. Use Export data instead.");return;}
+  saveFile("index.html",html,"text/html");
+  try{localStorage.setItem(LAST_KEY,JSON.stringify(DATA));}catch(e){}
+  updateBar("Downloaded index.html");
+  if(ed.tab==="publish") drawAdmin();
+}
+/*/admin*/
+
+/* ---------- start ---------- */
+render();
+/*admin*/setAdmin(true);/*/admin*/
+})();
+</script>
+</body>
+</html>
